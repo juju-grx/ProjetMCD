@@ -23,7 +23,7 @@ namespace MCD
 
         //affichage ---------------------------------------------------
 
-        public void drawEntite(Object entiteCurrent)
+        public void drawEntite(Entite entiteCurrent)
         {
             g = pictureBox.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -46,6 +46,15 @@ namespace MCD
             else
             {
                 g.DrawLines(new Pen(Color.Black, 1), points);
+            }
+
+            if(attributs != null)
+            {
+                Font drawFont = new Font("Arial", 16);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                
+                g.DrawString(name, drawFont, drawBrush, x + 2, y);
+                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2 , y + (sizeY/5) + 2);
             }
         }
 

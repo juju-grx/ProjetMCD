@@ -118,10 +118,9 @@ namespace MCD
         { // Créer un carré blancsur le formulaire
             g = pictureBox.CreateGraphics();
 
-            g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
+            //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
             g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
         }
-
 
         /*public void presRedimensionner(Entite objetCurrent)
         {
@@ -223,7 +222,7 @@ namespace MCD
                 {
                     if (tabEntite[i].attributs != null)
                     {
-                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t%" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
                     }
                     else
                     {
@@ -241,7 +240,7 @@ namespace MCD
                 {
                     if (tabAssociation[i].attributs != null)
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t%" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
                     }
                     else
                     {
@@ -256,7 +255,7 @@ namespace MCD
         public void makeRead(string filename)
         {
             string line;
-            string objetCurrent = null;
+            string objetCurrent_attributs = null;
 
             for (int i = 0; i < countEntite; i++)
             {
@@ -277,15 +276,15 @@ namespace MCD
                 line = line.Trim();
                 if (line != "")
                 {
-                    if (line.Contains("\t"))
+                    if (line.Contains("%"))
                     {
-                        if (objetCurrent == "E")
+                        if (objetCurrent_attributs == "E")
                         {
-                            entite.attributs = line.Replace(";", "\n").Replace("\t", "");
+                            entite.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
                         }
-                        else if (objetCurrent == "A")
+                        else if (objetCurrent_attributs == "A")
                         {
-                            association.attributs = line.Replace(";", "\n").Replace("\t", "");
+                            association.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
                         }
                     }
                     else
@@ -296,13 +295,13 @@ namespace MCD
                         {
                             newEntite(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countEntite += 1;
-                            objetCurrent = "E";
+                            objetCurrent_attributs = "E";
                         }
                         else if (line.Contains("A"))
                         {
                             newAssociation(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countAssociation += 1;
-                            objetCurrent = "A";
+                            objetCurrent_attributs = "A";
                         }
                         else if (line.Contains("L"))
                         {

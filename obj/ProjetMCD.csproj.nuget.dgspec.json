@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {}
+    "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {}
   },
   "projects": {
-    "D:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {
+    "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+        "projectUniqueName": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
         "projectName": "ProjetMCD",
-        "projectPath": "D:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "D:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
+        "projectPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+        "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
+        "outputPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -55,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
