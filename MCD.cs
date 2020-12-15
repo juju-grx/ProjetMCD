@@ -11,14 +11,17 @@ namespace MCD
 
         public int countEntite = 0;
         public int countAssociation = 0;
+        public int countLien = 0;
 
         public string objetCurrent = null;
 
         private Entite entiteCurrent;
         private Association associationCurrent;
+        private Lien lienCurrent;
 
         private Entite entitePrevious;
         private Association associationPrevious;
+        private Lien lienPrevious;
 
         Entite entite;
         Association association;
@@ -26,12 +29,14 @@ namespace MCD
 
         Entite[] tabEntite = new Entite[1000];
         Association[] tabAssociation = new Association[1000];
+        Lien[] tabLien = new Lien[1000];
 
         public MCD()
         {
             countEntite = 0;
             countAssociation = 0;
-        }
+            countLien = 0;
+    }
 
         //objet --------------------------------------------------------------------------------
 
@@ -48,7 +53,14 @@ namespace MCD
 
             tabAssociation[countAssociation] = association;
         }
-        
+        public void newLien(int X, int Y, int SizeX, int SizeY, string Code, string Name)
+        {
+            lien = new Lien (X, Y, countLien, SizeX, SizeY, Code, Name);
+
+            tabLien[countLien] = lien;
+            lienCurrent = lien;
+        }
+
         public void delObjet()
         {
             if(objetCurrent == "Entite")
@@ -71,6 +83,16 @@ namespace MCD
                     }
                 }
             }
+            else if (objetCurrent == "Lien")
+            {
+                for (int i = 0; i < countLien; i++)
+                {
+                    if (tabLien[i] == lienCurrent) //lien actuelle = lien dans le tab 
+                    {
+                        tabLien[i] = null;
+                    }
+                }
+            }
             reloadPage();
         }
         
@@ -88,6 +110,13 @@ namespace MCD
             association.drawAssociation(associationCurrent);
             association.x = X;
             association.y = Y;
+        }
+        public void drawCurrentLien(int X, int Y)
+        {
+            
+            lien.drawLien();
+            lien.sizeX = X;
+            lien.sizeY = Y;
         }
 
         public void reloadPage()
@@ -112,15 +141,23 @@ namespace MCD
                     tabAssociation[i].drawAssociation(associationCurrent);
                 }
             }
+            for (int i = 0; i < countLien; i++)
+            {
+                if (tabLien[i] != null)
+                {
+                    tabLien[i].drawLien(); // redessine l'entitié stocké à l'emplacement i de tabEntite
+                }
+            }
         }
 
         public void clearPage()
         { // Créer un carré blancsur le formulaire
             g = pictureBox.CreateGraphics();
 
-            //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
+            g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
             g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
         }
+
 
         /*public void presRedimensionner(Entite objetCurrent)
         {
@@ -222,7 +259,7 @@ namespace MCD
                 {
                     if (tabEntite[i].attributs != null)
                     {
-                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t%" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
                     }
                     else
                     {
@@ -240,7 +277,7 @@ namespace MCD
                 {
                     if (tabAssociation[i].attributs != null)
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t%" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
                     }
                     else
                     {
@@ -255,7 +292,7 @@ namespace MCD
         public void makeRead(string filename)
         {
             string line;
-            string objetCurrent_attributs = null;
+            string objetCurrent = null;
 
             for (int i = 0; i < countEntite; i++)
             {
@@ -276,15 +313,15 @@ namespace MCD
                 line = line.Trim();
                 if (line != "")
                 {
-                    if (line.Contains("%"))
+                    if (line.Contains("\t"))
                     {
-                        if (objetCurrent_attributs == "E")
+                        if (objetCurrent == "E")
                         {
-                            entite.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
+                            entite.attributs = line.Replace(";", "\n").Replace("\t", "");
                         }
-                        else if (objetCurrent_attributs == "A")
+                        else if (objetCurrent == "A")
                         {
-                            association.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
+                            association.attributs = line.Replace(";", "\n").Replace("\t", "");
                         }
                     }
                     else
@@ -295,13 +332,13 @@ namespace MCD
                         {
                             newEntite(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countEntite += 1;
-                            objetCurrent_attributs = "E";
+                            objetCurrent = "E";
                         }
                         else if (line.Contains("A"))
                         {
                             newAssociation(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countAssociation += 1;
-                            objetCurrent_attributs = "A";
+                            objetCurrent = "A";
                         }
                         else if (line.Contains("L"))
                         {
@@ -326,6 +363,18 @@ namespace MCD
         public Association GetAssociationCurrent()
         {
             return associationCurrent;
+        }
+        public Lien GetLienCurrent()
+        {
+            return lienCurrent;
+        }
+        public Association[] GetTabAssociation()
+        {
+            return tabAssociation;
+        }
+        public Entite[] GetTabEntite()
+        {
+            return tabEntite;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MCD
 
         //affichage --------------------------------------------------------
 
-        public void drawAssociation(Association associationCurrent)
+        public void drawAssociation(Object associationCurrent)
         {
             g = pictureBox.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;

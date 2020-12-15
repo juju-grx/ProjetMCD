@@ -19,6 +19,7 @@ namespace MCD
 
         Entite entiteCurrent;
         Association associationCurrent;
+        Lien lienCurrent;
 
         string mode = "Selection";
         string PhaseCourante = "null";
@@ -215,6 +216,13 @@ namespace MCD
                     mcd.reloadPage();
                     associationCurrent.drawAssociation(associationCurrent);
                 }
+                else if (lienCurrent != null)
+                {
+                    lienCurrent.x = x - dX;
+                    lienCurrent.y = y - dY;
+                    mcd.reloadPage();
+                    lienCurrent.drawLien();
+                }
             }
         }
 
@@ -247,7 +255,29 @@ namespace MCD
 
         private void ItererPhase_Lien_Nouvelle()
         {
+            if (mcd.checkObjet(x, y))
+            {
+                entiteCurrent = mcd.GetEntiteCurrent();
+                associationCurrent = mcd.GetAssociationCurrent();
 
+                mcd.newLien(x, y, x, y, ("L" + x + "_" + y), ("L" + x + "_" + y));
+                lienCurrent = mcd.GetLienCurrent();
+
+                if (entiteCurrent != null)
+                {
+                    lienCurrent.objetdepart = entiteCurrent.code;
+                    lienCurrent.x = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
+                    lienCurrent.y = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
+                }
+                else if (associationCurrent != null)
+                {
+                    lienCurrent.objetdepart = associationCurrent.code;
+                    lienCurrent.x = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
+                    lienCurrent.y = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
+                }
+                
+                mcd.drawCurrentLien(lienCurrent.x, lienCurrent.y);
+            }
         }
 
         private void PasserEnPhase_Lien_Position()
@@ -257,7 +287,11 @@ namespace MCD
 
         private void ItererPhase_Lien_Position()
         {
-
+            if (mouse == "Down")
+            {   
+                    mcd.reloadPage();
+                    mcd.drawCurrentLien(x, y);
+            }
         }
 
         private void PasserEnPhase_Lien_PositionDefinitive()
@@ -267,7 +301,31 @@ namespace MCD
 
         private void ItererPhase_Lien_PositionDefinitive()
         {
-            PasserEnPhase_Lien_Attente();
+            if (mcd.checkObjet(x, y))
+            {
+                entiteCurrent = mcd.GetEntiteCurrent();
+                associationCurrent = mcd.GetAssociationCurrent();
+
+                lienCurrent = mcd.GetLienCurrent();
+
+                if (entiteCurrent != null)
+                {
+                    lienCurrent.objetarrive = entiteCurrent.code;
+                    lienCurrent.x = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
+                    lienCurrent.y = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
+                }
+                else if (associationCurrent != null)
+                {
+                    lienCurrent.objetarrive = associationCurrent.code;
+                    lienCurrent.x = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
+                    lienCurrent.y = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
+                }
+
+                mcd.drawCurrentLien(lienCurrent.x, lienCurrent.y);
+                mcd.countLien += 1;
+                mcd.reloadPage();
+                PasserEnPhase_Lien_Attente();
+            }
         }
 
         //Entite ----------------------------------------------------------------
