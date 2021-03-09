@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\girojul\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\girojul\\.nuget\\packages"
+    ]
+  }
+}
