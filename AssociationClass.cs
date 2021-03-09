@@ -6,10 +6,12 @@ namespace MCD
 {
     class Association : Objet
     {
+        public Array assolien;
         Graphics g;
 
-        public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
+        public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name, Array Assolien)
         {
+            
             x = X;
             y = Y;
             id = Id;
@@ -18,7 +20,9 @@ namespace MCD
             pen = new Pen(Color.Black, 3);
             code = Code;
             name = Name;
+            assolien = Assolien;
         }
+        
 
         //affichage --------------------------------------------------------
 
@@ -27,10 +31,15 @@ namespace MCD
             g = pictureBox.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
+            SolidBrush whiteBrush = new SolidBrush(Color.White);
+            Rectangle rect = new Rectangle(x, y, sizeX, sizeY);
+            g.FillRectangle(whiteBrush, rect);
+
             if (this != associationCurrent)
             {
                 g.DrawArc(new Pen(Color.Black, 3), new Rectangle(x, y, sizeX, sizeY), 0, 180);
                 g.DrawArc(new Pen(Color.Black, 3), new Rectangle(x, y, sizeX, sizeY), 180, 360);
+
             }
             else
             {
@@ -43,7 +52,7 @@ namespace MCD
 
         public string makeRecording()
         {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
+            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY + " " + assolien );
         }
 
         public string attributsCorrect()

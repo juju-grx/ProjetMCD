@@ -23,7 +23,9 @@ namespace MCD
             pen = new Pen(Color.Black, 3);
             code = Code;
             name = Name;
-            
+            float startAngle = 45.0F;
+            float sweepAngle = 270.0F;
+
         }
 
         //affichage --------------------------------------------------------

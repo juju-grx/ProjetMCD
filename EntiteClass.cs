@@ -39,6 +39,10 @@ namespace MCD
                         new Point(x+sizeX, y+(sizeY/5))
                     };
 
+            SolidBrush whiteBrush = new SolidBrush(Color.White);
+            Rectangle rect = new Rectangle(x, y, sizeX, sizeY);
+            g.FillRectangle(whiteBrush, rect);
+
             if (this != entiteCurrent)
             {
                 g.DrawLines(new Pen(Color.Black, 3), points);
@@ -47,7 +51,9 @@ namespace MCD
             {
                 g.DrawLines(new Pen(Color.Black, 1), points);
             }
+
         }
+        
 
         // test ---------------------------------------------
 

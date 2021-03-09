@@ -8,10 +8,12 @@ namespace MCD
     class MCD
     {
         Graphics g;
-
+        public Array associationlien ;
         public int countEntite = 0;
         public int countAssociation = 0;
         public int countLien = 0;
+        public float startAngle = 45.0F;
+        public float sweepAngle = 270.0F;
 
         public string objetCurrent = null;
 
@@ -49,7 +51,7 @@ namespace MCD
 
         public void newAssociation(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
-            association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name);
+            association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name, associationlien);
 
             tabAssociation[countAssociation] = association;
         }
@@ -127,6 +129,20 @@ namespace MCD
 
         public void drawAll()
         {
+            for (int i = 0; i < countLien; i++)
+            {
+                if (tabLien[i] != null)
+                {
+                    if (tabLien[i].objetdepart == tabLien[i].objetarrive)
+                    {
+                        g = pictureBox.CreateGraphics();
+                        Pen blackPen = new Pen(Color.Black, 3);
+                        Rectangle rect = new Rectangle(entiteCurrent.x, entiteCurrent.y, entiteCurrent.sizeX, entiteCurrent.sizeY); // essayer d voir avec un DrawCurve
+                        g.DrawArc(blackPen, rect, startAngle, sweepAngle);
+                    }
+                    tabLien[i].drawLien(); // redessine le lien stocké à l'emplacement i de tabLien
+                }
+            }
             for (int i = 0; i < countEntite; i++)
             {
                 if(tabEntite[i] != null)
@@ -141,17 +157,11 @@ namespace MCD
                     tabAssociation[i].drawAssociation(associationCurrent);
                 }
             }
-            for (int i = 0; i < countLien; i++)
-            {
-                if (tabLien[i] != null)
-                {
-                    tabLien[i].drawLien(); // redessine l'entitié stocké à l'emplacement i de tabEntite
-                }
-            }
+
         }
 
         public void clearPage()
-        { // Créer un carré blancsur le formulaire
+        { // Créer un carré blanc sur le formulaire
             g = pictureBox.CreateGraphics();
 
             g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
@@ -239,7 +249,33 @@ namespace MCD
                         reloadPage();
                     }
                 }
+
             }
+           /* for (int i = 0; i < countLien; i++)
+            {
+                if (tabLien[i] != null && tabLien[i].withinObjet(X, Y) == true) //si il est dans une association
+                {
+                    if ((lienCurrent == null) || (lienCurrent != lienPrevious))
+                    {
+                        lienCurrent = tabLien[i];
+                        objetCurrent = "Lien";
+                        reloadPage();
+                        lienPrevious = lienCurrent;
+                    }
+                    return true;
+                }
+                else
+                {
+                    if (lienCurrent == tabLien[i])
+                    {
+                        lienPrevious = null;
+                        lienCurrent  = null;
+                        reloadPage();
+                    }
+                }
+
+            } */
+
 
             // Si entiteCourante(True) != nouvelle coor (False) alors sortie donc réaffichage  
             // mais Si entiteCourante(False) != nouvelle coor (True) alors rentrée donc réaffichage 
@@ -247,6 +283,7 @@ namespace MCD
             // mais Si entitieCourante(True) == nouvelle coor (True) alors on est toujours dedans donc ne rien faire
             return false;
         }
+
 
         // Write -----------------------------------------------------------------------------------
 
@@ -277,14 +314,15 @@ namespace MCD
                 {
                     if (tabAssociation[i].attributs != null)
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'association avec attributs
                     }
                     else
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs de l'entité
+                        file.WriteLine(tabAssociation[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs de l'association
                     }
                 }
             }
+
         }
 
         // Read -------------------------------------------------------------------------------------
@@ -304,6 +342,12 @@ namespace MCD
                 tabAssociation[i] = null;
             }
             countAssociation = 0;
+            for (int i = 0; i < countLien; i++)
+            {
+                tabLien[i] = null;
+            }
+            countLien = 0;
+
 
             StreamReader sr = new StreamReader(@filename);
             do
@@ -322,6 +366,10 @@ namespace MCD
                         else if (objetCurrent == "A")
                         {
                             association.attributs = line.Replace(";", "\n").Replace("\t", "");
+                        }
+                        else if (objetCurrent == "L")
+                        {
+                            lien.attributs = line.Replace(";", "\n").Replace("\t", "");
                         }
                     }
                     else
@@ -342,9 +390,9 @@ namespace MCD
                         }
                         else if (line.Contains("L"))
                         {
-                                /*newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
+                                newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                                 countLien += 1;
-                                objetCurrent = "L";*/
+                                objetCurrent = "L";
                         }
                     }
                 }
@@ -375,6 +423,10 @@ namespace MCD
         public Entite[] GetTabEntite()
         {
             return tabEntite;
+        }
+        public Lien[] GetTabLien()
+        {
+            return tabLien;
         }
     }
 }
