@@ -60,7 +60,7 @@ namespace MCD
                         tabEntite[i] = null;
                     }
                 }
-                reloadPage(entiteCurrent.x, entiteCurrent.y);
+                reloadPage();
             }
             else if (objetCurrent == "Association")
             {
@@ -71,7 +71,7 @@ namespace MCD
                         tabAssociation[i] = null;
                     }
                 }
-                reloadPage(associationCurrent.x, associationCurrent.y);
+                reloadPage();
             }
         }
         
@@ -91,9 +91,9 @@ namespace MCD
             association.y = Y;
         }
 
-        public void reloadPage(int x, int y)
+        public void reloadPage()
         {
-            clearPage(x, y); //créer un carré blanc sur tout le form
+            clearPage(); //créer un carré blanc sur tout le form
             drawAll();   //Réaffiche tout les objets créer
         }
 
@@ -115,25 +115,11 @@ namespace MCD
             }
         }
 
-        public void clearPage(int x, int y)
+        public void clearPage()
         { 
-            if(x == 810 && y == 420)
-            {
-                // Créer un carré blancsur le formulaire
-                g = pictureBox.CreateGraphics();
-
-                //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
-            }
-            else
-            {
-                // Créer un carré blancsur le formulaire
-                g = pictureBox.CreateGraphics();
-
-                //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(x, y, 100/*sizeX*/, 100/*sizeY*/));
-            }
-            
+            // Créer un carré blancsur le formulaire
+            g = pictureBox.CreateGraphics();
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
         }
 
         public void objetRedimensionnement(string objetCurrent)
@@ -153,9 +139,8 @@ namespace MCD
                     {
                         entiteCurrent = tabEntite[i];
                         objetCurrent = "Entite";
-                        reloadPage(entiteCurrent.x, entiteCurrent.y);
+                        reloadPage();
                         entitePrevious = entiteCurrent;
-                        //presRedimensionner(entiteCurrent);
                     }
                     return true;
                 }
@@ -164,7 +149,7 @@ namespace MCD
                     if (entiteCurrent == tabEntite[i])
                     {
                         entitePrevious = null;
-                        reloadPage(entiteCurrent.x, entiteCurrent.y);
+                        reloadPage();
                         entiteCurrent = null;
                         
                     }
@@ -179,7 +164,7 @@ namespace MCD
                     {
                         associationCurrent = tabAssociation[i];
                         objetCurrent = "Association";
-                        reloadPage(associationCurrent.x, associationCurrent.y);
+                        reloadPage();
                         associationPrevious = associationCurrent;
                     }
                     return true;
@@ -189,7 +174,7 @@ namespace MCD
                     if (associationCurrent == tabAssociation[i])
                     {
                         associationPrevious = null;
-                        reloadPage(associationCurrent.x, associationCurrent.y);
+                        reloadPage();
                         associationCurrent = null;
                     }
                 }
@@ -304,7 +289,7 @@ namespace MCD
                 }
             } while (true);
             sr.Close();
-            reloadPage(810, 420);
+            reloadPage();
         }
 
         // Getters ---------------------------------------------------------------------

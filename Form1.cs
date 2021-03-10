@@ -217,14 +217,14 @@ namespace MCD
                 {
                     entiteCurrent.x = x - dX;
                     entiteCurrent.y = y - dY;
-                    mcd.reloadPage(entiteCurrent.x, entiteCurrent.y);
+                    mcd.reloadPage();
                     entiteCurrent.draw();
                 }
                 else if (associationCurrent != null)
                 {
                     associationCurrent.x = x - dX;
                     associationCurrent.y = y - dY;
-                    mcd.reloadPage(associationCurrent.x, associationCurrent.y);
+                    mcd.reloadPage();
                     associationCurrent.draw();
                 }
             }
@@ -314,7 +314,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(entiteCurrent.x , entiteCurrent.y);
+                mcd.reloadPage();
                 mcd.drawCurrentEntite(x, y);
             }
         }
@@ -362,7 +362,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(associationCurrent.x, associationCurrent.y);
+                mcd.reloadPage();
                 mcd.drawCurrentAssociation(x, y);
             }
         }
@@ -578,13 +578,12 @@ namespace MCD
                 if (mcd.checkObjet(x, y))
                 {
                     Delete = true;
-                    mcd.reloadPage(810, 420);
                 }
                 else if (mcd.checkObjet(x, y) == false)
                 {
                     Delete = false;
-                    mcd.reloadPage(810, 420);
                 }
+                mcd.reloadPage();
             }
         }
     }
