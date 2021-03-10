@@ -14,17 +14,12 @@ namespace MCD
 
         public string objetCurrent = null;
 
-        private Entite entiteCurrent;
         private Association associationCurrent;
 
-        private Entite entitePrevious;
         private Association associationPrevious;
 
-        Entite entite;
         Association association;
-        //Lien lien;
 
-        Entite[] tabEntite = new Entite[1000];
         Association[] tabAssociation = new Association[1000];
 
         public MCD()
@@ -35,13 +30,6 @@ namespace MCD
 
         //objet --------------------------------------------------------------------------------
 
-        public void newEntite(int X, int Y, int SizeX, int SizeY, string Code, string Name)
-        {
-            entite = new Entite(X, Y, countEntite, SizeX, SizeY, Code, Name); // Créer une nouvelle entité (coordonée X,coordonnée Y,compteur d'entitées créer, taille X, taille Y, Couleur,code)
-
-            tabEntite[countEntite] = entite;
-        }
-
         public void newAssociation(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
             association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name);
@@ -51,18 +39,7 @@ namespace MCD
         
         public void delObjet()
         {
-            if(objetCurrent == "Entite")
-            {
-                for (int i = 0; i < countEntite; i++)
-                {
-                    if (tabEntite[i] == entiteCurrent) //entite actuelle = entité dans le tab 
-                    {
-                        tabEntite[i] = null;
-                    }
-                }
-                reloadPage(entiteCurrent.x, entiteCurrent.y);
-            }
-            else if (objetCurrent == "Association")
+            if (objetCurrent == "Association")
             {
                 for (int i = 0; i < countAssociation; i++)
                 {
@@ -71,18 +48,11 @@ namespace MCD
                         tabAssociation[i] = null;
                     }
                 }
-                reloadPage(associationCurrent.x, associationCurrent.y);
+                reloadPage();
             }
         }
         
-            //affichage -------------------------------------------------------------------------------
-
-        public void drawCurrentEntite(int X, int Y)
-        {
-            entite.draw();
-            entite.x = X;
-            entite.y = Y;
-        }
+        //affichage -------------------------------------------------------------------------------
 
         public void drawCurrentAssociation(int X, int Y)
         {
@@ -91,21 +61,14 @@ namespace MCD
             association.y = Y;
         }
 
-        public void reloadPage(int x, int y)
+        public void reloadPage()
         {
-            clearPage(x, y); //créer un carré blanc sur tout le form
+            clearPage(); //créer un carré blanc sur tout le form
             drawAll();   //Réaffiche tout les objets créer
         }
 
         public void drawAll()
         {
-            for (int i = 0; i < countEntite; i++)
-            {
-                if(tabEntite[i] != null)
-                {
-                    tabEntite[i].draw(); // redessine l'entitié stocké à l'emplacement i de tabEntite
-                }
-            }
             for (int i = 0; i < countAssociation; i++)
             {
                 if (tabAssociation[i] != null)
@@ -115,62 +78,17 @@ namespace MCD
             }
         }
 
-        public void clearPage(int x, int y)
-        { 
-            if(x == 810 && y == 420)
-            {
-                // Créer un carré blancsur le formulaire
-                g = pictureBox.CreateGraphics();
-
-                //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
-            }
-            else
-            {
-                // Créer un carré blancsur le formulaire
-                g = pictureBox.CreateGraphics();
-
-                //g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(0, 0, 10000, 10000));
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(x, y, 100/*sizeX*/, 100/*sizeY*/));
-            }
-            
-        }
-
-        public void objetRedimensionnement(string objetCurrent)
+        public void clearPage()
         {
-            
+            // Créer un carré blancsur le formulaire
+            g = pictureBox.CreateGraphics();
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 1000, 1000));
         }
 
         //verif ----------------------------------------------------------------------------------------
 
         public bool checkObjet(int X, int Y)
         {
-            for (int i = 0; i < countEntite; i++)
-            {
-                if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true ) //si il est dans une entité 
-                {
-                    if ((entiteCurrent == null) || (entiteCurrent != entitePrevious))
-                    {
-                        entiteCurrent = tabEntite[i];
-                        objetCurrent = "Entite";
-                        reloadPage(entiteCurrent.x, entiteCurrent.y);
-                        entitePrevious = entiteCurrent;
-                        //presRedimensionner(entiteCurrent);
-                    }
-                    return true;
-                }
-                else
-                {
-                    if (entiteCurrent == tabEntite[i])
-                    {
-                        entitePrevious = null;
-                        reloadPage(entiteCurrent.x, entiteCurrent.y);
-                        entiteCurrent = null;
-                        
-                    }
-                }
-            }
-
             for (int i = 0; i < countAssociation; i++)
             {
                 if (tabAssociation[i] != null && tabAssociation[i].withinObjet(X, Y) == true) //si il est dans une association
@@ -179,7 +97,7 @@ namespace MCD
                     {
                         associationCurrent = tabAssociation[i];
                         objetCurrent = "Association";
-                        reloadPage(associationCurrent.x, associationCurrent.y);
+                        reloadPage();
                         associationPrevious = associationCurrent;
                     }
                     return true;
@@ -189,7 +107,7 @@ namespace MCD
                     if (associationCurrent == tabAssociation[i])
                     {
                         associationPrevious = null;
-                        reloadPage(associationCurrent.x, associationCurrent.y);
+                        reloadPage();
                         associationCurrent = null;
                     }
                 }
@@ -207,24 +125,7 @@ namespace MCD
         public void makeRecording(string filename)
         {
             using StreamWriter file = new StreamWriter(@filename, false);
-            for (int i = 0; i < countEntite; i++)
-            {
-                if (tabEntite[i] != null)
-                {
-                    if (tabEntite[i].attributs != null)
-                    {
-                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t%" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
-                    }
-                    else
-                    {
-                        file.WriteLine(tabEntite[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs de l'entité
-                    }
-                }
-                else
-                {
-                    file.WriteLine("");
-                }
-            }
+            
             for (int i = 0; i < countAssociation; i++)
             {
                 if (tabAssociation[i] != null)
@@ -248,11 +149,6 @@ namespace MCD
             string line;
             string objetCurrent_attributs = null;
 
-            for (int i = 0; i < countEntite; i++)
-            {
-                tabEntite[i] = null;
-            }
-            countEntite = 0;
             for (int i = 0; i < countAssociation; i++)
             {
                 tabAssociation[i] = null;
@@ -269,11 +165,7 @@ namespace MCD
                 {
                     if (line.Contains("%"))
                     {
-                        if (objetCurrent_attributs == "E")
-                        {
-                            entite.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
-                        }
-                        else if (objetCurrent_attributs == "A")
+                        if (objetCurrent_attributs == "A")
                         {
                             association.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
                         }
@@ -282,37 +174,20 @@ namespace MCD
                     {
                         String[] objet = line.Split(' ');
 
-                        if (line.Contains("E"))
-                        {
-                            newEntite(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
-                            countEntite += 1;
-                            objetCurrent_attributs = "E";
-                        }
-                        else if (line.Contains("A"))
+                        if (line.Contains("A"))
                         {
                             newAssociation(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countAssociation += 1;
                             objetCurrent_attributs = "A";
                         }
-                        else if (line.Contains("L"))
-                        {
-                                /*newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
-                                countLien += 1;
-                                objetCurrent = "L";*/
-                        }
                     }
                 }
             } while (true);
             sr.Close();
-            reloadPage(810, 420);
+            reloadPage();
         }
 
         // Getters ---------------------------------------------------------------------
-
-        public Entite GetEntiteCurrent()
-        {
-            return entiteCurrent;
-        }
 
         public Association GetAssociationCurrent()
         {

@@ -17,7 +17,6 @@ namespace MCD
 
         MCD mcd;
 
-        Entite entiteCurrent;
         Association associationCurrent;
 
         string mode = "Selection";
@@ -118,13 +117,7 @@ namespace MCD
             else if (mode == "Selection")
             {
                 mcd.checkObjet(e.X, e.Y);
-                if (entiteCurrent != null)
-                {
-                    debug.Enabled = true;
-                    debug.Visible = true;
-                    debug.Text = entiteCurrent.debugEntite(); 
-                }
-                else if (associationCurrent != null)
+                if (associationCurrent != null)
                 {
                     debug.Enabled = true;
                     debug.Visible = true;
@@ -189,15 +182,9 @@ namespace MCD
 
         private void ItererPhase_Selection_Nouvelle()
         {
-            entiteCurrent = mcd.GetEntiteCurrent();
             associationCurrent = mcd.GetAssociationCurrent();
 
-            if (entiteCurrent != null)
-            {
-                dX = x - entiteCurrent.x;
-                dY = y - entiteCurrent.y;
-            }
-            else if (associationCurrent != null)
+            if (associationCurrent != null)
             {
                 dX = x - associationCurrent.x;
                 dY = y - associationCurrent.y;
@@ -213,18 +200,11 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                if (entiteCurrent != null)
-                {
-                    entiteCurrent.x = x - dX;
-                    entiteCurrent.y = y - dY;
-                    mcd.reloadPage(entiteCurrent.x, entiteCurrent.y);
-                    entiteCurrent.draw();
-                }
-                else if (associationCurrent != null)
+                if (associationCurrent != null)
                 {
                     associationCurrent.x = x - dX;
                     associationCurrent.y = y - dY;
-                    mcd.reloadPage(associationCurrent.x, associationCurrent.y);
+                    mcd.reloadPage();
                     associationCurrent.draw();
                 }
             }
@@ -301,8 +281,7 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            mcd.newEntite(x, y, 115, 97, ("E" + x + "_" + y), ("E" + x + "_" + y));
-            mcd.drawCurrentEntite(x, y);
+
         }
 
         private void PasserEnPhase_Entite_Position()
@@ -312,11 +291,7 @@ namespace MCD
 
         private void ItererPhase_Entite_Position()
         {
-            if (mouse == "Down")
-            {
-                mcd.reloadPage(entiteCurrent.x , entiteCurrent.y);
-                mcd.drawCurrentEntite(x, y);
-            }
+            
         }
 
         private void PasserEnPhase_Entite_PositionDefinitive()
@@ -362,7 +337,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(associationCurrent.x, associationCurrent.y);
+                mcd.reloadPage();
                 mcd.drawCurrentAssociation(x, y);
             }
         }
@@ -514,12 +489,7 @@ namespace MCD
                 if (mcd.checkObjet(e.X, e.Y))
                 {
                     panelDonnee.Visible = true;
-                    if(mcd.objetCurrent == "Entite")
-                    {
-                        NameObjet.Text = entiteCurrent.name;
-                        TextBoxAttribut.Text = entiteCurrent.attributs;
-                    }
-                    else if (mcd.objetCurrent == "Association")
+                    if (mcd.objetCurrent == "Association")
                     {
                         NameObjet.Text = associationCurrent.name;
                         TextBoxAttribut.Text = associationCurrent.attributs;
@@ -535,28 +505,7 @@ namespace MCD
             panelDonnee.Visible = false;
             mode = "Selection";
             changeEnabled(true);
-            if (mcd.objetCurrent == "Entite")
-            {
-                entiteCurrent.name = NameObjet.Text;
-                entiteCurrent.attributs = TextBoxAttribut.Text;
-                String[] objet = entiteCurrent.attributs.Split('\n');
-                if(entiteCurrent.name.Length * 12 > 115)
-                {
-                    entiteCurrent.sizeX = entiteCurrent.name.Length * 12;
-                }
-                if(objet[0] != null)
-                {
-                    if(5 + objet[0].Length * 11 > 100)
-                    {
-                        entiteCurrent.sizeX = 5 + objet[0].Length * 11;
-                    }
-                }
-                if(objet.Length > 4)
-                {
-                    entiteCurrent.sizeY = 97 + (objet.Length - 4) * 28;
-                }
-            }
-            else if (mcd.objetCurrent == "Association")
+            if (mcd.objetCurrent == "Association")
             {
                 associationCurrent.name = NameObjet.Text;
                 associationCurrent.attributs = TextBoxAttribut.Text;
@@ -578,13 +527,12 @@ namespace MCD
                 if (mcd.checkObjet(x, y))
                 {
                     Delete = true;
-                    mcd.reloadPage(810, 420);
                 }
                 else if (mcd.checkObjet(x, y) == false)
                 {
                     Delete = false;
-                    mcd.reloadPage(810, 420);
                 }
+                mcd.reloadPage();
             }
         }
     }
