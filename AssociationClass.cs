@@ -27,13 +27,8 @@ namespace MCD
             g = pictureBox.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 0, 180);
-                g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 180, 360);
-
-            if (redimensionnement == true)
-            {
-                g.DrawRectangle(new Pen(Color.Blue, 5), x, y, 2, 2);
-            }
+            g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 0, 180);
+            g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 180, 360);
         }
 
         // Record ----------------------------------------------------

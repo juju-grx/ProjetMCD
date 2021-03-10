@@ -543,28 +543,16 @@ namespace MCD
             {
                 entiteCurrent.name = NameObjet.Text;
                 entiteCurrent.attributs = TextBoxAttribut.Text;
-                String[] objet = entiteCurrent.attributs.Split('\n');
-                if(entiteCurrent.name.Length * 12 > 115)
-                {
-                    entiteCurrent.sizeX = entiteCurrent.name.Length * 12;
-                }
-                if(objet[0] != null)
-                {
-                    if(5 + objet[0].Length * 11 > 100)
-                    {
-                        entiteCurrent.sizeX = 5 + objet[0].Length * 11;
-                    }
-                }
-                if(objet.Length > 4)
-                {
-                    entiteCurrent.sizeY = 97 + (objet.Length - 4) * 28;
-                }
+                entiteCurrent.redimensionnement(g);
+                entiteCurrent = null;
             }
             else if (mcd.objetCurrent == "Association")
             {
                 associationCurrent.name = NameObjet.Text;
                 associationCurrent.attributs = TextBoxAttribut.Text;
+                associationCurrent = null;
             }
+            mcd.redrawPage();
         }
         
         private void form1_KeyDown(object sender, KeyEventArgs e)

@@ -178,7 +178,6 @@
             // TextBoxAttribut
             // 
             this.TextBoxAttribut.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TextBoxAttribut.Enabled = false;
             this.TextBoxAttribut.Location = new System.Drawing.Point(0, 22);
             this.TextBoxAttribut.Name = "TextBoxAttribut";
             this.TextBoxAttribut.Size = new System.Drawing.Size(250, 278);

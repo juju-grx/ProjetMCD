@@ -4,12 +4,11 @@ namespace MCD
 {
     class Objet
     {
+        public int id;
         public int x;
         public int y;
-        public int id;
         public int sizeX = 100;
         public int sizeY = 125;
-        public bool redimensionnement = false;
         public string name;
         public string code;
         public string attributs;

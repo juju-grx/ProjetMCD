@@ -28,9 +28,6 @@ namespace MCD
 
         public void draw(Graphics g)
         {
-            //g = pictureBox.CreateGraphics();
-            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
             g.DrawString(name, drawFont, drawBrush, x + 2, y);
 
             if (attributs != null)
@@ -57,6 +54,31 @@ namespace MCD
 
             g.DrawLines(new Pen(Color.Black, 1), pointsTitre);
             g.DrawLines(new Pen(Color.Black, 1), pointsAttributs);
+        }
+
+        public void redimensionnement(Graphics g)
+        {
+            String[] objet = attributs.Split('\n');
+            SizeF nameSize = g.MeasureString(name, drawFont);
+            int namesize = (int) nameSize.Width;
+            if (nameSize.Width > 115) 
+            {
+                sizeX = namesize + 2; 
+            } else
+            {
+                sizeX = 115;
+            }
+            if (objet[0] != null)
+            {
+                if (5 + objet[0].Length * 11 > 100)
+                {
+                    sizeX = 5 + objet[0].Length * 11;
+                }
+            }
+            if (objet.Length > 4)
+            {
+                sizeY = 97 + (objet.Length - 4) * 28;
+            }
         }
 
         // Record ----------------------------------------------------
