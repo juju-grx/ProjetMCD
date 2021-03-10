@@ -18,7 +18,6 @@ namespace MCD
         MCD mcd;
 
         Entite entiteCurrent;
-        Association associationCurrent;
 
         string mode = "Selection";
         string PhaseCourante = "null";
@@ -124,12 +123,6 @@ namespace MCD
                     debug.Visible = true;
                     debug.Text = entiteCurrent.debugEntite(); 
                 }
-                else if (associationCurrent != null)
-                {
-                    debug.Enabled = true;
-                    debug.Visible = true;
-                    debug.Text = associationCurrent.debugEntite();
-                }
                 else 
                 { 
                     debug.Enabled = false;
@@ -190,17 +183,11 @@ namespace MCD
         private void ItererPhase_Selection_Nouvelle()
         {
             entiteCurrent = mcd.GetEntiteCurrent();
-            associationCurrent = mcd.GetAssociationCurrent();
 
             if (entiteCurrent != null)
             {
                 dX = x - entiteCurrent.x;
                 dY = y - entiteCurrent.y;
-            }
-            else if (associationCurrent != null)
-            {
-                dX = x - associationCurrent.x;
-                dY = y - associationCurrent.y;
             }
         }
 
@@ -217,15 +204,8 @@ namespace MCD
                 {
                     entiteCurrent.x = x - dX;
                     entiteCurrent.y = y - dY;
-                    mcd.reloadPage(entiteCurrent.x, entiteCurrent.y);
+                    mcd.reloadPage();
                     entiteCurrent.draw();
-                }
-                else if (associationCurrent != null)
-                {
-                    associationCurrent.x = x - dX;
-                    associationCurrent.y = y - dY;
-                    mcd.reloadPage(associationCurrent.x, associationCurrent.y);
-                    associationCurrent.draw();
                 }
             }
         }
@@ -314,7 +294,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(entiteCurrent.x , entiteCurrent.y);
+                mcd.reloadPage();
                 mcd.drawCurrentEntite(x, y);
             }
         }
@@ -349,8 +329,7 @@ namespace MCD
 
         private void ItererPhase_Association_Nouvelle()
         {
-            mcd.newAssociation(x, y, 100, 50, ("A" + x + "_" + y), ("A" + x + "_" + y));
-            mcd.drawCurrentAssociation(x, y);
+            
         }
 
         private void PasserEnPhase_Association_Position()
@@ -360,11 +339,7 @@ namespace MCD
 
         private void ItererPhase_Association_Position()
         {
-            if (mouse == "Down")
-            {
-                mcd.reloadPage(associationCurrent.x, associationCurrent.y);
-                mcd.drawCurrentAssociation(x, y);
-            }
+            
         }
 
         private void PasserEnPhase_Association_PositionDefinitive()
@@ -519,11 +494,6 @@ namespace MCD
                         NameObjet.Text = entiteCurrent.name;
                         TextBoxAttribut.Text = entiteCurrent.attributs;
                     }
-                    else if (mcd.objetCurrent == "Association")
-                    {
-                        NameObjet.Text = associationCurrent.name;
-                        TextBoxAttribut.Text = associationCurrent.attributs;
-                    }
                     mode = "EcritDonnee";
                     changeEnabled(false);
                 }
@@ -556,11 +526,6 @@ namespace MCD
                     entiteCurrent.sizeY = 97 + (objet.Length - 4) * 28;
                 }
             }
-            else if (mcd.objetCurrent == "Association")
-            {
-                associationCurrent.name = NameObjet.Text;
-                associationCurrent.attributs = TextBoxAttribut.Text;
-            }
         }
         
         private void form1_KeyDown(object sender, KeyEventArgs e)
@@ -578,13 +543,12 @@ namespace MCD
                 if (mcd.checkObjet(x, y))
                 {
                     Delete = true;
-                    mcd.reloadPage(810, 420);
                 }
                 else if (mcd.checkObjet(x, y) == false)
                 {
                     Delete = false;
-                    mcd.reloadPage(810, 420);
                 }
+                mcd.reloadPage();
             }
         }
     }

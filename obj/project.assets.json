@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+      "projectUniqueName": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
       "projectName": "ProjetMCD",
-      "projectPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+      "projectPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
       "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
-      "outputPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
+      "outputPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
