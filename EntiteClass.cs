@@ -7,7 +7,6 @@ namespace MCD
 {
     class Entite : Objet
     {
-        Graphics g;
 
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -27,10 +26,10 @@ namespace MCD
 
         //affichage ---------------------------------------------------
 
-        public void draw()
+        public void draw(Graphics g)
         {
-            g = pictureBox.CreateGraphics();
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //g = pictureBox.CreateGraphics();
+            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             g.DrawString(name, drawFont, drawBrush, x + 2, y);
 

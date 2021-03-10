@@ -9,6 +9,8 @@ namespace MCD
     {
         Graphics g;
 
+        
+
         public int countEntite = 0;
         public int countAssociation = 0;
 
@@ -27,10 +29,11 @@ namespace MCD
         Entite[] tabEntite = new Entite[1000];
         Association[] tabAssociation = new Association[1000];
 
-        public MCD()
+        public MCD(Graphics G)
         {
             countEntite = 0;
             countAssociation = 0;
+            g = G;
         }
 
         //objet --------------------------------------------------------------------------------
@@ -60,7 +63,7 @@ namespace MCD
                         tabEntite[i] = null;
                     }
                 }
-                reloadPage();
+                redrawPage();
             }
             else if (objetCurrent == "Association")
             {
@@ -71,7 +74,7 @@ namespace MCD
                         tabAssociation[i] = null;
                     }
                 }
-                reloadPage();
+                redrawPage();
             }
         }
         
@@ -79,19 +82,19 @@ namespace MCD
 
         public void drawCurrentEntite(int X, int Y)
         {
-            entite.draw();
             entite.x = X;
             entite.y = Y;
+            entite.draw(g);
         }
 
         public void drawCurrentAssociation(int X, int Y)
         {
-            association.draw();
             association.x = X;
             association.y = Y;
+            association.draw();
         }
 
-        public void reloadPage()
+        public void redrawPage()
         {
             clearPage(); //créer un carré blanc sur tout le form
             drawAll();   //Réaffiche tout les objets créer
@@ -99,11 +102,12 @@ namespace MCD
 
         public void drawAll()
         {
+
             for (int i = 0; i < countEntite; i++)
             {
                 if(tabEntite[i] != null)
                 {
-                    tabEntite[i].draw(); // redessine l'entitié stocké à l'emplacement i de tabEntite
+                    tabEntite[i].draw(g); // redessine l'entitié stocké à l'emplacement i de tabEntite
                 }
             }
             for (int i = 0; i < countAssociation; i++)
@@ -119,7 +123,7 @@ namespace MCD
         { 
             // Créer un carré blancsur le formulaire
             g = pictureBox.CreateGraphics();
-            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 10000, 10000));
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 1000, 1000));
         }
 
         public void objetRedimensionnement(string objetCurrent)
@@ -139,7 +143,6 @@ namespace MCD
                     {
                         entiteCurrent = tabEntite[i];
                         objetCurrent = "Entite";
-                        reloadPage();
                         entitePrevious = entiteCurrent;
                     }
                     return true;
@@ -149,9 +152,7 @@ namespace MCD
                     if (entiteCurrent == tabEntite[i])
                     {
                         entitePrevious = null;
-                        reloadPage();
                         entiteCurrent = null;
-                        
                     }
                 }
             }
@@ -164,7 +165,6 @@ namespace MCD
                     {
                         associationCurrent = tabAssociation[i];
                         objetCurrent = "Association";
-                        reloadPage();
                         associationPrevious = associationCurrent;
                     }
                     return true;
@@ -174,7 +174,6 @@ namespace MCD
                     if (associationCurrent == tabAssociation[i])
                     {
                         associationPrevious = null;
-                        reloadPage();
                         associationCurrent = null;
                     }
                 }
@@ -289,7 +288,7 @@ namespace MCD
                 }
             } while (true);
             sr.Close();
-            reloadPage();
+            redrawPage();
         }
 
         // Getters ---------------------------------------------------------------------

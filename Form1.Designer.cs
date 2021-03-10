@@ -207,7 +207,6 @@
             this.Controls.Add(this.panelDonnee);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
-            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Projet MCD";

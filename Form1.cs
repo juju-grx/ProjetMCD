@@ -7,6 +7,8 @@ namespace MCD
 {
     public partial class Form1 : Form
     {
+        Graphics g;
+
         public static PictureBox pictureBox = null;
         public static RichTextBox richTextBox = null;
 
@@ -30,7 +32,9 @@ namespace MCD
             InitializeComponent();
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
-            mcd = new MCD();
+            g = pictureBox.CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            mcd = new MCD(g);
         }
         //Bouton ---------------------------------------------------------------
 
@@ -217,14 +221,14 @@ namespace MCD
                 {
                     entiteCurrent.x = x - dX;
                     entiteCurrent.y = y - dY;
-                    mcd.reloadPage();
-                    entiteCurrent.draw();
+                    mcd.redrawPage();
+                    entiteCurrent.draw(g);
                 }
                 else if (associationCurrent != null)
                 {
                     associationCurrent.x = x - dX;
                     associationCurrent.y = y - dY;
-                    mcd.reloadPage();
+                    mcd.redrawPage();
                     associationCurrent.draw();
                 }
             }
@@ -314,7 +318,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage();
+                mcd.redrawPage();
                 mcd.drawCurrentEntite(x, y);
             }
         }
@@ -362,7 +366,7 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage();
+                mcd.redrawPage();
                 mcd.drawCurrentAssociation(x, y);
             }
         }
@@ -583,7 +587,7 @@ namespace MCD
                 {
                     Delete = false;
                 }
-                mcd.reloadPage();
+                mcd.redrawPage();
             }
         }
     }

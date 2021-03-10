@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {}
+    "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {
+    "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+        "projectUniqueName": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
         "projectName": "ProjetMCD",
-        "projectPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+        "projectPath": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
         "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\obj\\",
+        "outputPath": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
