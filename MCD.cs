@@ -126,11 +126,6 @@ namespace MCD
             g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 1000, 1000));
         }
 
-        public void objetRedimensionnement(string objetCurrent)
-        {
-            
-        }
-
         //verif ----------------------------------------------------------------------------------------
 
         public bool checkObjet(int X, int Y)

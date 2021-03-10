@@ -11,7 +11,6 @@ namespace MCD
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
 
-
         public Entite(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
         {
             x = X;
@@ -34,6 +33,7 @@ namespace MCD
             {
                 g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + (sizeY / 5) + 2);
             }
+
             Point[] pointsTitre =
                         {
                         new Point(x, y),
@@ -58,27 +58,37 @@ namespace MCD
 
         public void redimensionnement(Graphics g)
         {
-            String[] objet = attributs.Split('\n');
             SizeF nameSize = g.MeasureString(name, drawFont);
             int namesize = (int) nameSize.Width;
+
             if (nameSize.Width > 115) 
             {
                 sizeX = namesize + 2; 
-            } else
+            } else 
             {
                 sizeX = 115;
             }
-            if (objet[0] != null)
+
+            if (attributs != null)
             {
-                if (5 + objet[0].Length * 11 > 100)
+                String[] objet = attributs.Split('\n');
+
+                SizeF attributsSize = g.MeasureString(objet[0], new Font("Arial", 14));
+                int attributssize = (int)attributsSize.Height;
+
+                if(attributssize * objet.Length > 125)
                 {
-                    sizeX = 5 + objet[0].Length * 11;
+                    sizeY = attributssize * objet.Length + 2;
+                } else
+                {
+                    sizeY = 125;
                 }
             }
-            if (objet.Length > 4)
+            else
             {
-                sizeY = 97 + (objet.Length - 4) * 28;
+                sizeY = 125;
             }
+            
         }
 
         // Record ----------------------------------------------------
@@ -96,12 +106,12 @@ namespace MCD
 
         public string debugEntite()
         {
-            string var = ("x = "     + x     + "\n" 
+            string var =( "id = "    + id    + "\n" 
                         + "y = "     + y     + "\n" 
-                        + "id = "    + id    + "\n" 
+                        + "x = "     + x     + "\n" 
                         + "sizeX = " + sizeX + "\n" 
                         + "sizeY = " + sizeY + "\n" 
-                        + "code = "  + code);
+                        + "code = "  + code) ;
 
             return var;
         }

@@ -542,8 +542,21 @@ namespace MCD
             if (mcd.objetCurrent == "Entite")
             {
                 entiteCurrent.name = NameObjet.Text;
-                entiteCurrent.attributs = TextBoxAttribut.Text;
+                String[] objet = TextBoxAttribut.Text.Split('\n');
+                entiteCurrent.attributs = objet[0];
+                for (int i = 1; i < objet.Length; i ++)
+                {
+                    if(objet[i] != "")
+                    {
+                        entiteCurrent.attributs = entiteCurrent.attributs + '\n' + objet[i];
+                    }
+                }
+                if(entiteCurrent.attributs == "")
+                {
+                    entiteCurrent.attributs = null;
+                }
                 entiteCurrent.redimensionnement(g);
+
                 entiteCurrent = null;
             }
             else if (mcd.objetCurrent == "Association")
