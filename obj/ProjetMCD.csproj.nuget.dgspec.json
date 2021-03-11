@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\julie\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {}
+    "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\julie\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {
+    "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\julie\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+        "projectUniqueName": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
         "projectName": "ProjetMCD",
-        "projectPath": "C:\\Users\\julie\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
-        "packagesPath": "C:\\Users\\julie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\julie\\Source\\Repos\\ProjetMCD\\obj\\",
+        "projectPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+        "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\julie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

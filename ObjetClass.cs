@@ -7,8 +7,10 @@ namespace MCD
         public int id;
         public int x;
         public int y;
-        public int sizeX = 100;
-        public int sizeY = 125;
+        public int sizeX;
+        public int sizeY;
+        public int sizeXMin = 115;
+        public int sizeYMin = 100;
         public string name;
         public string code;
         public string attributs;

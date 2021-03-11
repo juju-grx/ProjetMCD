@@ -21,6 +21,15 @@ namespace MCD
             pen = new Pen(Color.Black, 3);
             code = Code;
             name = Name;
+
+            if(sizeX < sizeXMin)
+            {
+                sizeX = sizeXMin;
+            }
+            if (sizeY < sizeYMin)
+            {
+                sizeY = sizeYMin;
+            }
         }
 
         //affichage ---------------------------------------------------
@@ -31,7 +40,7 @@ namespace MCD
 
             if (attributs != null)
             {
-                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + (sizeY / 5) + 2);
+                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27);
             }
 
             Point[] pointsTitre =
@@ -76,17 +85,17 @@ namespace MCD
                 SizeF attributsSize = g.MeasureString(objet[0], new Font("Arial", 14));
                 int attributssize = (int)attributsSize.Height;
 
-                if(attributssize * objet.Length > 125)
+                if(attributssize * objet.Length > 100)
                 {
                     sizeY = attributssize * objet.Length + 2;
                 } else
                 {
-                    sizeY = 125;
+                    sizeY = 100;
                 }
             }
             else
             {
-                sizeY = 125;
+                sizeY = 100;
             }
             
         }

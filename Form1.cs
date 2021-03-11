@@ -305,7 +305,7 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            mcd.newEntite(x, y, 115, 97, ("E" + x + "_" + y), ("E" + x + "_" + y));
+            mcd.newEntite(x, y, 115, 100, ("E" + x + "_" + y), ("E" + x + "_" + y));
             mcd.drawCurrentEntite(x, y);
         }
 
