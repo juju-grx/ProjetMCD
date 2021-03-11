@@ -9,8 +9,6 @@ namespace MCD
     {
         Graphics g;
 
-        
-
         public int countEntite = 0;
         public int countAssociation = 0;
 
@@ -24,7 +22,6 @@ namespace MCD
 
         Entite entite;
         Association association;
-        //Lien lien;
 
         Entite[] tabEntite = new Entite[1000];
         Association[] tabAssociation = new Association[1000];
@@ -40,7 +37,7 @@ namespace MCD
 
         public void newEntite(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
-            entite = new Entite(X, Y, countEntite, SizeX, SizeY, Code, Name); // Créer une nouvelle entité (coordonée X,coordonnée Y,compteur d'entitées créer, taille X, taille Y, Couleur,code)
+            entite = new Entite(X, Y, countEntite, SizeX, SizeY, Code, Name);
 
             tabEntite[countEntite] = entite;
         }
@@ -58,7 +55,7 @@ namespace MCD
             {
                 for (int i = 0; i < countEntite; i++)
                 {
-                    if (tabEntite[i] == entiteCurrent) //entite actuelle = entité dans le tab 
+                    if (tabEntite[i] == entiteCurrent)
                     {
                         tabEntite[i] = null;
                     }
@@ -69,7 +66,7 @@ namespace MCD
             {
                 for (int i = 0; i < countAssociation; i++)
                 {
-                    if (tabAssociation[i] == associationCurrent) //association actuelle = association dans le tab 
+                    if (tabAssociation[i] == associationCurrent)
                     {
                         tabAssociation[i] = null;
                     }
@@ -91,13 +88,13 @@ namespace MCD
         {
             association.x = X;
             association.y = Y;
-            association.draw();
+            association.draw(g);
         }
 
         public void redrawPage()
         {
-            clearPage(); //créer un carré blanc sur tout le form
-            drawAll();   //Réaffiche tout les objets créer
+            clearPage();
+            drawAll();
         }
 
         public void drawAll()
@@ -107,21 +104,20 @@ namespace MCD
             {
                 if(tabEntite[i] != null)
                 {
-                    tabEntite[i].draw(g); // redessine l'entitié stocké à l'emplacement i de tabEntite
+                    tabEntite[i].draw(g);
                 }
             }
             for (int i = 0; i < countAssociation; i++)
             {
                 if (tabAssociation[i] != null)
                 {
-                    tabAssociation[i].draw();
+                    tabAssociation[i].draw(g);
                 }
             }
         }
 
         public void clearPage()
-        { 
-            // Créer un carré blancsur le formulaire
+        {
             g = pictureBox.CreateGraphics();
             g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, 1000, 1000));
         }
@@ -132,7 +128,7 @@ namespace MCD
         {
             for (int i = 0; i < countEntite; i++)
             {
-                if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true ) //si il est dans une entité 
+                if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true )
                 {
                     if ((entiteCurrent == null) || (entiteCurrent != entitePrevious))
                     {
@@ -154,7 +150,7 @@ namespace MCD
 
             for (int i = 0; i < countAssociation; i++)
             {
-                if (tabAssociation[i] != null && tabAssociation[i].withinObjet(X, Y) == true) //si il est dans une association
+                if (tabAssociation[i] != null && tabAssociation[i].withinObjet(X, Y) == true)
                 {
                     if ((associationCurrent == null) || (associationCurrent != associationPrevious))
                     {
@@ -192,11 +188,11 @@ namespace MCD
                 {
                     if (tabEntite[i].attributs != null)
                     {
-                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t@" + tabEntite[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabEntite[i].makeRecording() + "\n\t@" + tabEntite[i].attributsCorrect());
                     }
                     else
                     {
-                        file.WriteLine(tabEntite[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs de l'entité
+                        file.WriteLine(tabEntite[i].makeRecording());
                     }
                 }
                 else
@@ -210,11 +206,11 @@ namespace MCD
                 {
                     if (tabAssociation[i].attributs != null)
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t%" + tabAssociation[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs de l'entité avec attributs
+                        file.WriteLine(tabAssociation[i].makeRecording() + "\n\t%" + tabAssociation[i].attributsCorrect());
                     }
                     else
                     {
-                        file.WriteLine(tabAssociation[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs de l'entité
+                        file.WriteLine(tabAssociation[i].makeRecording());
                     }
                 }
             }
@@ -273,12 +269,12 @@ namespace MCD
                             countAssociation += 1;
                             objetCurrent_attributs = "A";
                         }
-                        else if (line.Contains("L"))
+                        /*else if (line.Contains("L"))
                         {
-                                /*newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
-                                countLien += 1;
-                                objetCurrent = "L";*/
-                        }
+                             newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
+                             countLien += 1;
+                             objetCurrent = "L";
+                        }*/
                     }
                 }
             } while (true);

@@ -7,6 +7,8 @@ namespace MCD
 {
     class Entite : Objet
     {
+        public int sizeXMin = 115;
+        public int sizeYMin = 100;
 
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -87,7 +89,7 @@ namespace MCD
 
                 if(attributssize * objet.Length > 100)
                 {
-                    sizeY = attributssize * objet.Length + 2;
+                    sizeY = attributssize * objet.Length;
                 } else
                 {
                     sizeY = 100;
@@ -98,31 +100,6 @@ namespace MCD
                 sizeY = 100;
             }
             
-        }
-
-        // Record ----------------------------------------------------
-
-        public string makeRecording()
-        {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
-        }
-
-        public string attributsCorrect()
-        {
-            string _attributs = attributs.Replace("\n", ";");
-            return _attributs;
-        }
-
-        public string debugEntite()
-        {
-            string var =( "id = "    + id    + "\n" 
-                        + "y = "     + y     + "\n" 
-                        + "x = "     + x     + "\n" 
-                        + "sizeX = " + sizeX + "\n" 
-                        + "sizeY = " + sizeY + "\n" 
-                        + "code = "  + code) ;
-
-            return var;
         }
     }
 }

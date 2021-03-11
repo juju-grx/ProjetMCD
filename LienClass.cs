@@ -7,6 +7,9 @@ namespace MCD
     {
         Graphics g;
 
+        public int sizeXMin = 115;
+        public int sizeYMin = 100;
+
         public Lien(int X, int Y, int Id, int SizeX, int SizeY, string Colors, string Code)
         {
             x = X;
@@ -20,26 +23,9 @@ namespace MCD
 
         //affichage --------------------------------------------------------
 
-        public void drawAssociation(Lien LienCurrent)
+        public void drawAssociation(Graphics g)
         {
-            g = pictureBox.CreateGraphics();
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            if (this != LienCurrent)
-            {
-                g.DrawLine(pen, x, y, sizeX, sizeY);
-            }
-            else
-            {
-                g.DrawLine(pen, x, y, sizeX, sizeY);
-            }
-        }
-
-        // Record ----------------------------------------------------
-
-        public string makeRecording()
-        {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
+            g.DrawLine(pen, x, y, sizeX, sizeY);
         }
     }
 }

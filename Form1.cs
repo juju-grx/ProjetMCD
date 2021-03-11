@@ -241,6 +241,7 @@ namespace MCD
 
         private void ItererPhase_Selection_PositionDefinitive()
         {
+            mcd.redrawPage();
             PasserEnPhase_Selection_Attente();
         }
 
@@ -582,6 +583,7 @@ namespace MCD
             {
                 if (mcd.checkObjet(x, y))
                 {
+                    entiteCurrent
                     Delete = true;
                 }
                 else if (mcd.checkObjet(x, y) == false)
