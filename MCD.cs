@@ -203,7 +203,6 @@ namespace MCD
         public void makeRead(string filename)
         {
             string line;
-            string objetCurrent_attributs = null;
 
             for (int i = 0; i < countEntite; i++)
             {
@@ -236,13 +235,11 @@ namespace MCD
                         {
                             newEntite(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countEntite += 1;
-                            objetCurrent_attributs = "E";
                         }
                         else if (line.Contains("A"))
                         {
                             newAssociation(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
                             countAssociation += 1;
-                            objetCurrent_attributs = "A";
                         }
                         /*else if (line.Contains("L"))
                         {

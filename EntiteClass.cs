@@ -11,6 +11,8 @@ namespace MCD
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
 
+        Pen pen = new Pen(Color.Black, 1);
+
         public Entite(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
         {
             x = X;
@@ -61,8 +63,21 @@ namespace MCD
                         new Point(x, y + 25)
                     };
 
-            g.DrawLines(new Pen(Color.Black, 1), pointsTitre);
-            g.DrawLines(new Pen(Color.Black, 1), pointsAttributs);
+            g.DrawLines(pen, pointsTitre);
+            g.DrawLines(pen, pointsAttributs);
+
+            if(resize == true)
+            {
+                drawRezise(g);
+            }
+        }
+
+        public override void drawRezise(Graphics g) 
+        {
+            g.DrawRectangle(pen, x - 2        , y - 2, 4, 4);
+            g.DrawRectangle(pen, x + sizeX - 2, y - 2, 4, 4);
+            g.DrawRectangle(pen, x - 2        , y + sizeY + 23, 4, 4);
+            g.DrawRectangle(pen, x + sizeX - 2, y + sizeY + 23, 4, 4);
         }
 
         public override void redimensionnement(Graphics g)

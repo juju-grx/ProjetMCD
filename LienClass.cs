@@ -5,8 +5,6 @@ namespace MCD
 {
     class Lien : Objet
     {
-        Graphics g;
-
         public int sizeXMin = 115;
         public int sizeYMin = 100;
 

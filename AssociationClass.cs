@@ -6,10 +6,11 @@ namespace MCD
 {
     class Association : Objet
     {
-        Graphics g;
-
         public int sizeXMin = 115;
         public int sizeYMin = 100;
+
+        Font drawFont = new Font("Arial", 16);
+        SolidBrush drawBrush = new SolidBrush(Color.Black);
 
         public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
         {
@@ -34,7 +35,7 @@ namespace MCD
 
         //affichage --------------------------------------------------------
 
-        public void draw(Graphics g)
+        public override void draw(Graphics g)
         {
             g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 0, 180);
             g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 180, 360);

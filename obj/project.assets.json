@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+      "projectUniqueName": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
       "projectName": "ProjetMCD",
-      "projectPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\ProjetMCD.csproj",
+      "projectPath": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
       "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\girojul\\Source\\Repos\\ProjetMCD\\obj\\",
+      "outputPath": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -66,5 +66,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problème de lecture du fichier cache C:\\Users\\girojul\\source\\repos\\ProjetMCD\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

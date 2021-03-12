@@ -9,6 +9,7 @@ namespace MCD
         public int y;
         public int sizeX;
         public int sizeY;
+        public bool resize = false;
         public string name;
         public string code;
         public string attributs;
@@ -22,19 +23,8 @@ namespace MCD
             {
                 return true;
             }
+            resize = false;
             return false;
-        }
-
-        public string debugEntite()
-        {
-            string var = ("id = " + id + "\n"
-                        + "y = " + y + "\n"
-                        + "x = " + x + "\n"
-                        + "sizeX = " + sizeX + "\n"
-                        + "sizeY = " + sizeY + "\n"
-                        + "code = " + code);
-
-            return var;
         }
 
         // Record ----------------------------------------------------
@@ -50,14 +40,24 @@ namespace MCD
             return _attributs;
         }
 
-        public virtual void draw(Graphics g)
-        {
+        // Draw --------------------------------------------------------
 
+        public string debugEntite()
+        {
+            string var = ("id = " + id + "\n"
+                        + "y = " + y + "\n"
+                        + "x = " + x + "\n"
+                        + "sizeX = " + sizeX + "\n"
+                        + "sizeY = " + sizeY + "\n"
+                        + "code = " + code);
+
+            return var;
         }
 
-        public virtual void redimensionnement(Graphics g)
-        {
+        public virtual void drawRezise(Graphics g){}
 
-        }
+        public virtual void draw(Graphics g){}
+
+        public virtual void redimensionnement(Graphics g){}
     }
 }

@@ -95,10 +95,6 @@ namespace MCD
             }
             else if (mode == "Selection")
             {
-                if (mouse == "Down")
-                {
-                    mcd.checkObjet(e.X, e.Y);
-                }
                 PasserEnPhase_Selection_Nouvelle();
             }
             else if (mode == "Lien")
@@ -191,12 +187,16 @@ namespace MCD
 
         private void ItererPhase_Selection_Nouvelle()
         {
+
+            mcd.checkObjet(x, y);
             objetCurrent = mcd.GetObjetCurrent();
 
             if (objetCurrent != null)
             {
+                objetCurrent.resize = true;
                 dX = x - objetCurrent.x;
                 dY = y - objetCurrent.y;
+                mcd.redrawPage();
             }
         }
 
