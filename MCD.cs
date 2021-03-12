@@ -12,16 +12,8 @@ namespace MCD
         public int countEntite = 0;
         public int countAssociation = 0;
 
-        public string objetCurrent = null;
-
-        private Entite entiteCurrent;
-        private Association associationCurrent;
-
-        private Entite entitePrevious;
-        private Association associationPrevious;
-
-        Entite entite;
-        Association association;
+        public Objet objetCurrent;
+        public Objet objetPrevious;
 
         Entite[] tabEntite = new Entite[1000];
         Association[] tabAssociation = new Association[1000];
@@ -37,58 +29,50 @@ namespace MCD
 
         public void newEntite(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
-            entite = new Entite(X, Y, countEntite, SizeX, SizeY, Code, Name);
+            tabEntite[countEntite] = new Entite(X, Y, countEntite, SizeX, SizeY, Code, Name);
 
-            tabEntite[countEntite] = entite;
+            objetCurrent = tabEntite[countEntite];
         }
 
         public void newAssociation(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
-            association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name);
+            tabAssociation[countAssociation] = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name);
 
-            tabAssociation[countAssociation] = association;
+            objetCurrent = tabAssociation[countAssociation];
         }
         
         public void delObjet()
         {
-            if(objetCurrent == "Entite")
+            if(objetCurrent is Entite)
             {
                 for (int i = 0; i < countEntite; i++)
                 {
-                    if (tabEntite[i] == entiteCurrent)
+                    if (tabEntite[i] == objetCurrent)
                     {
                         tabEntite[i] = null;
                     }
                 }
-                redrawPage();
             }
-            else if (objetCurrent == "Association")
+            else if (objetCurrent is Association)
             {
                 for (int i = 0; i < countAssociation; i++)
                 {
-                    if (tabAssociation[i] == associationCurrent)
+                    if (tabAssociation[i] == objetCurrent)
                     {
                         tabAssociation[i] = null;
                     }
                 }
-                redrawPage();
             }
+            redrawPage();
         }
         
             //affichage -------------------------------------------------------------------------------
 
-        public void drawCurrentEntite(int X, int Y)
+        public void drawCurrentObjet(int X, int Y)
         {
-            entite.x = X;
-            entite.y = Y;
-            entite.draw(g);
-        }
-
-        public void drawCurrentAssociation(int X, int Y)
-        {
-            association.x = X;
-            association.y = Y;
-            association.draw(g);
+            objetCurrent.x = X;
+            objetCurrent.y = Y;
+            objetCurrent.draw(g);
         }
 
         public void redrawPage()
@@ -130,20 +114,19 @@ namespace MCD
             {
                 if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true )
                 {
-                    if ((entiteCurrent == null) || (entiteCurrent != entitePrevious))
+                    if ((objetCurrent == null) || (objetCurrent != objetPrevious))
                     {
-                        entiteCurrent = tabEntite[i];
-                        objetCurrent = "Entite";
-                        entitePrevious = entiteCurrent;
+                        objetCurrent = tabEntite[i];
+                        objetPrevious = objetCurrent;
                     }
                     return true;
                 }
                 else
                 {
-                    if (entiteCurrent == tabEntite[i])
+                    if (objetCurrent == tabEntite[i])
                     {
-                        entitePrevious = null;
-                        entiteCurrent = null;
+                        objetPrevious = null;
+                        objetCurrent = null;
                     }
                 }
             }
@@ -152,20 +135,19 @@ namespace MCD
             {
                 if (tabAssociation[i] != null && tabAssociation[i].withinObjet(X, Y) == true)
                 {
-                    if ((associationCurrent == null) || (associationCurrent != associationPrevious))
+                    if ((objetCurrent == null) || (objetCurrent != objetPrevious))
                     {
-                        associationCurrent = tabAssociation[i];
-                        objetCurrent = "Association";
-                        associationPrevious = associationCurrent;
+                        objetCurrent = tabAssociation[i];
+                        objetPrevious = objetCurrent;
                     }
                     return true;
                 }
                 else
                 {
-                    if (associationCurrent == tabAssociation[i])
+                    if (objetCurrent == tabAssociation[i])
                     {
-                        associationPrevious = null;
-                        associationCurrent = null;
+                        objetPrevious = null;
+                        objetCurrent = null;
                     }
                 }
             }
@@ -244,14 +226,7 @@ namespace MCD
                 {
                     if (line.Contains("%"))
                     {
-                        if (objetCurrent_attributs == "E")
-                        {
-                            entite.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
-                        }
-                        else if (objetCurrent_attributs == "A")
-                        {
-                            association.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
-                        }
+                        objetCurrent.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
                     }
                     else
                     {
@@ -284,14 +259,9 @@ namespace MCD
 
         // Getters ---------------------------------------------------------------------
 
-        public Entite GetEntiteCurrent()
+        public Objet GetObjetCurrent()
         {
-            return entiteCurrent;
-        }
-
-        public Association GetAssociationCurrent()
-        {
-            return associationCurrent;
+            return objetCurrent;
         }
     }
 }

@@ -49,5 +49,15 @@ namespace MCD
             string _attributs = attributs.Replace("\n", ";");
             return _attributs;
         }
+
+        public virtual void draw(Graphics g)
+        {
+
+        }
+
+        public virtual void redimensionnement(Graphics g)
+        {
+
+        }
     }
 }

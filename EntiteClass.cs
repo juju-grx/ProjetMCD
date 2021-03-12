@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Drawing;
-using static MCD.Form1;
 
 namespace MCD
 {
@@ -36,7 +34,7 @@ namespace MCD
 
         //affichage ---------------------------------------------------
 
-        public void draw(Graphics g)
+        public override  void draw(Graphics g)
         {
             g.DrawString(name, drawFont, drawBrush, x + 2, y);
 
@@ -67,7 +65,7 @@ namespace MCD
             g.DrawLines(new Pen(Color.Black, 1), pointsAttributs);
         }
 
-        public void redimensionnement(Graphics g)
+        public override void redimensionnement(Graphics g)
         {
             SizeF nameSize = g.MeasureString(name, drawFont);
             int namesize = (int) nameSize.Width;
@@ -84,15 +82,26 @@ namespace MCD
             {
                 String[] objet = attributs.Split('\n');
 
-                SizeF attributsSize = g.MeasureString(objet[0], new Font("Arial", 14));
-                int attributssize = (int)attributsSize.Height;
+                SizeF attributsSizeY = g.MeasureString(objet[0], new Font("Arial", 14));
+                int attributssizeY = (int)attributsSizeY.Height;
 
-                if(attributssize * objet.Length > 100)
+                if(attributssizeY * objet.Length > 100)
                 {
-                    sizeY = attributssize * objet.Length;
+                    sizeY = attributssizeY * objet.Length;
                 } else
                 {
                     sizeY = 100;
+                }
+
+                for (int i = 0; i <objet.Length; i++)
+                {
+                    SizeF attributsSizeX = g.MeasureString(objet[i], new Font("Arial", 14));
+                    int attributssizeX = (int)attributsSizeX.Width;
+
+                    if (attributssizeX > sizeX)
+                    {
+                        sizeX = attributssizeX;
+                    }
                 }
             }
             else
