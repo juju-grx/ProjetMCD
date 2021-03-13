@@ -88,3 +88,6 @@ C:\Users\julie\Source\Repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.C
 C:\Users\julie\Source\Repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.dll
 C:\Users\julie\Source\Repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.pdb
 C:\Users\julie\Source\Repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.genruntimeconfig.cache
+C:\Users\julie\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+C:\Users\julie\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
+C:\Users\julie\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll

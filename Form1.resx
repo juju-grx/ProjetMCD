@@ -57,4 +57,386 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Private.CoreLib" name="System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e" />
+  <data name="NameObjet.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>9</value>
+  </data>
+  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="bt_Selection.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>65, 25</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="bt_Lien.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>75, 25</value>
+  </data>
+  <data name="bt_Entite.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>1</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>1904, 41</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing.Primitives">
+    <value>7, 15</value>
+  </data>
+  <data name="debug.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelDonnee.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>250, 300</value>
+  </data>
+  <data name="bt_off.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;bt_ouvrir.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="debug.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>12, 62</value>
+  </data>
+  <data name="bt_Selection.AutoSize" type="System.Boolean, System.Private.CoreLib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;debug.Name" xml:space="preserve">
+    <value>debug</value>
+  </data>
+  <data name="bt_off.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="NameObjet.Font" type="System.Drawing.Font, System.Drawing.Common">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;NameObjet.Parent" xml:space="preserve">
+    <value>panelDonnee</value>
+  </data>
+  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelDonnee.Visible" type="System.Boolean, System.Private.CoreLib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;bt_Selection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBoxAttribut.Name" xml:space="preserve">
+    <value>TextBoxAttribut</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bt_Association.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;dataRecord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bt_Association.Name" xml:space="preserve">
+    <value>bt_Association</value>
+  </data>
+  <data name="&gt;&gt;panelDonnee.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="bt_off.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="bt_enregistrer.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>385, 6</value>
+  </data>
+  <data name="&gt;&gt;debug.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;bt_enregistrer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bt_Entite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bt_Selection.Name" xml:space="preserve">
+    <value>bt_Selection</value>
+  </data>
+  <data name="TextBoxAttribut.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>250, 278</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>9</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 0</value>
+  </data>
+  <data name="NameObjet.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>225, 23</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>800, 450</value>
+  </data>
+  <data name="bt_Selection.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="bt_off.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>22, 22</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_Entite.Text" xml:space="preserve">
+    <value>Entite</value>
+  </data>
+  <data name="bt_ouvrir.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>75, 30</value>
+  </data>
+  <data name="debug.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;bt_enregistrer.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;bt_Lien.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_Selection.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>12, 9</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;bt_Entite.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bt_Lien.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panelDonnee.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>1904, 1041</value>
+  </data>
+  <data name="&gt;&gt;bt_Entite.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;dataRecord.Name" xml:space="preserve">
+    <value>dataRecord</value>
+  </data>
+  <data name="&gt;&gt;NameObjet.Name" xml:space="preserve">
+    <value>NameObjet</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bt_Lien.Name" xml:space="preserve">
+    <value>bt_Lien</value>
+  </data>
+  <data name="bt_ouvrir.Text" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="panelDonnee.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>7</value>
+  </data>
+  <data name="debug.Enabled" type="System.Boolean, System.Private.CoreLib">
+    <value>False</value>
+  </data>
+  <data name="panel1.AutoSize" type="System.Boolean, System.Private.CoreLib">
+    <value>True</value>
+  </data>
+  <data name="bt_Entite.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>83, 9</value>
+  </data>
+  <data name="&gt;&gt;bt_off.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_enregistrer.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;bt_Association.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bt_off.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bt_Lien.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>245, 9</value>
+  </data>
+  <data name="panelDonnee.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>835, 390</value>
+  </data>
+  <data name="bt_Association.Text" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="panel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="bt_Association.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>3</value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>1920, 1080</value>
+  </data>
+  <data name="&gt;&gt;TextBoxAttribut.Parent" xml:space="preserve">
+    <value>panelDonnee</value>
+  </data>
+  <data name="bt_Entite.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>75, 25</value>
+  </data>
+  <data name="&gt;&gt;bt_ouvrir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, System.Private.CoreLib">
+    <value>True</value>
+  </data>
+  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="bt_Selection.Text" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="&gt;&gt;NameObjet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_ouvrir.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;bt_enregistrer.Name" xml:space="preserve">
+    <value>bt_enregistrer</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Projet MCD</value>
+  </data>
+  <data name="&gt;&gt;bt_enregistrer.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="bt_enregistrer.Text" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="NameObjet.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 0</value>
+  </data>
+  <data name="bt_ouvrir.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>466, 6</value>
+  </data>
+  <data name="&gt;&gt;debug.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;bt_ouvrir.Name" xml:space="preserve">
+    <value>bt_ouvrir</value>
+  </data>
+  <data name="&gt;&gt;bt_Lien.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="bt_Lien.Text" xml:space="preserve">
+    <value>Lien</value>
+  </data>
+  <data name="TextBoxAttribut.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="&gt;&gt;debug.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="bt_enregistrer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>75, 30</value>
+  </data>
+  <data name="&gt;&gt;panelDonnee.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_Lien.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form1</value>
+  </data>
+  <data name="bt_Selection.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;NameObjet.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bt_Association.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>75, 25</value>
+  </data>
+  <data name="&gt;&gt;TextBoxAttribut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="debug.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>98, 93</value>
+  </data>
+  <data name="&gt;&gt;bt_Association.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TextBoxAttribut.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 22</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>1904, 1041</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;panelDonnee.Name" xml:space="preserve">
+    <value>panelDonnee</value>
+  </data>
+  <data name="bt_off.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>228, 1</value>
+  </data>
+  <data name="bt_Association.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>164, 9</value>
+  </data>
+  <data name="&gt;&gt;bt_off.Parent" xml:space="preserve">
+    <value>panelDonnee</value>
+  </data>
+  <data name="&gt;&gt;bt_Entite.Name" xml:space="preserve">
+    <value>bt_Entite</value>
+  </data>
+  <data name="&gt;&gt;TextBoxAttribut.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;bt_off.Name" xml:space="preserve">
+    <value>bt_off</value>
+  </data>
+  <data name="&gt;&gt;bt_Selection.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bt_Selection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bt_ouvrir.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TextBoxAttribut.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>7</value>
+  </data>
+  <data name="TextBoxAttribut.Text" xml:space="preserve">
+    <value />
+  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+    <value>fr</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+    <value>True</value>
+  </metadata>
 </root>

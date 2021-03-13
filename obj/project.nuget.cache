@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "U+WqDtG3B3g32qpKw6xwijaEq9DUMfDWHrbfOOrFHVVuKPTZUXS+qSv7OTLEb9zxs43EqmiYoULYCX2XOw6ikw==",
+  "dgSpecHash": "aRXHYa0ffNrxIfStBkZu1ACRGepIGuyEDVc7BLsm1sHh9b/rtL4K26RpdWx/BeemFcLoyUJnbeRRU+vsDJlRzw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\girojul\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
+  "projectFilePath": "C:\\Users\\julie\\source\\repos\\ProjetMCD\\ProjetMCD.csproj",
   "expectedPackageFiles": [],
   "logs": [
     {
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problème de lecture du fichier cache C:\\Users\\girojul\\source\\repos\\ProjetMCD\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problème de lecture du fichier cache C:\\Users\\julie\\source\\repos\\ProjetMCD\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
 }

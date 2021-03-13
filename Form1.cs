@@ -213,6 +213,7 @@ namespace MCD
                 {
                     objetCurrent.x = x - dX;
                     objetCurrent.y = y - dY;
+                    is_in_limit();
                     mcd.redrawPage();
                     objetCurrent.draw(g);
                 }
@@ -226,7 +227,6 @@ namespace MCD
 
         private void ItererPhase_Selection_PositionDefinitive()
         {
-            mcd.redrawPage();
             PasserEnPhase_Selection_Attente();
         }
 
@@ -291,8 +291,21 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            mcd.newEntite(x, y, 115, 100, ("E" + x + "_" + y), ("E" + x + "_" + y));
-            mcd.drawCurrentObjet(x, y);
+            int sizeX = 115;
+            int sizeY = 100;
+
+            int dX = x - sizeX / 2;
+            int dY = y - sizeY / 2;
+
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if(objetCurrent == null)
+            {
+                mcd.newEntite(dX, dY, sizeX, sizeY, ("E" + x + "_" + y), ("E" + x + "_" + y));
+                objetCurrent = mcd.GetObjetCurrent();
+                mcd.drawCurrentObjet(dX, dY);
+            }            
         }
 
         private void PasserEnPhase_Entite_Position()
@@ -304,8 +317,11 @@ namespace MCD
         {
             if (mouse == "Down")
             {
+                objetCurrent.x = x - objetCurrent.sizeX / 2;
+                objetCurrent.y = y - objetCurrent.sizeY / 2;
+                is_in_limit();
                 mcd.redrawPage();
-                mcd.drawCurrentObjet(x, y);
+                objetCurrent.draw(g);
             }
         }
 
@@ -316,6 +332,7 @@ namespace MCD
 
         private void ItererPhase_Entite_PositionDefinitive()
         {
+            objetCurrent = null;
             mcd.countEntite += 1;
             PasserEnPhase_Entite_Attente();
         }
@@ -568,6 +585,14 @@ namespace MCD
                 }
                 mcd.redrawPage();
             }
+        }
+
+        public void is_in_limit()
+        {
+            if (objetCurrent.x < 0) { objetCurrent.x = 3; }
+            if (objetCurrent.y < 45) { objetCurrent.y = 45; }
+            if (objetCurrent.x + objetCurrent.sizeX > pictureBox1.Width) { objetCurrent.x = pictureBox1.Width - objetCurrent.sizeX - 3; }
+            if (objetCurrent.y + objetCurrent.sizeY + 25 > pictureBox1.Height) { objetCurrent.y = pictureBox1.Height - objetCurrent.sizeY - 3; }
         }
     }
 }
