@@ -29,6 +29,7 @@ namespace MCD
         public Form1()
         {
             InitializeComponent();
+            panelDonnee.Location = new Point(Size.Width / 2 - panelDonnee.Width/2, Size.Height / 2 - panelDonnee.Height / 2); 
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
             g = pictureBox.CreateGraphics();

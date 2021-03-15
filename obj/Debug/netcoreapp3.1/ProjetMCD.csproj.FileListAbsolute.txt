@@ -66,3 +66,13 @@ C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.Assemb
 C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.CoreCompileInputs.cache
 C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.dll
 C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.pdb
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.exe
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.deps.json
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.runtimeconfig.json
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.runtimeconfig.dev.json
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.dll
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.pdb
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.genruntimeconfig.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+C:\Users\girojul\source\repos\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
