@@ -9,6 +9,11 @@
       "ProjetMCD/1.0.0": {
         "runtime": {
           "ProjetMCD.dll": {}
+        },
+        "resources": {
+          "fr/ProjetMCD.resources.dll": {
+            "locale": "fr"
+          }
         }
       }
     }

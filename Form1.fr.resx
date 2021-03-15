@@ -59,7 +59,7 @@
   </resheader>
   <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="bt_Lien.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>259, 23</value>
+    <value>268, 23</value>
   </data>
   <data name="bt_Lien.Text" xml:space="preserve">
     <value>Lien</value>
@@ -72,6 +72,9 @@
   </data>
   <data name="bt_Association.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>178, 23</value>
+  </data>
+  <data name="bt_Association.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>84, 23</value>
   </data>
   <data name="bt_Association.Text" xml:space="preserve">
     <value>Association</value>
@@ -98,8 +101,27 @@
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1904, 1041</value>
+  </data>
+  <assembly alias="System.Private.CoreLib" name="System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e" />
+  <data name="debug2.Enabled" type="System.Boolean, System.Private.CoreLib">
+    <value>False</value>
+  </data>
+  <data name="debug2.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>586, 11</value>
+  </data>
+  <data name="debug2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>140, 50</value>
+  </data>
+  <data name="debug2.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>4</value>
+  </data>
+  <data name="debug2.Text" xml:space="preserve">
+    <value />
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -128,13 +150,22 @@
   <data name="TextBoxAttribut.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>300, 379</value>
   </data>
+  <data name="panelDonnee.Enabled" type="System.Boolean, System.Private.CoreLib">
+    <value>False</value>
+  </data>
   <data name="panelDonnee.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>698, 234</value>
   </data>
   <data name="panelDonnee.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>300, 400</value>
   </data>
+  <data name="panelDonnee.Visible" type="System.Boolean, System.Private.CoreLib">
+    <value>False</value>
+  </data>
   <data name="debug.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>12, 224</value>
+    <value>12, 81</value>
+  </data>
+  <data name="debug.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>100, 158</value>
   </data>
 </root>

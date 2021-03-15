@@ -29,7 +29,7 @@ namespace MCD
         public Form1()
         {
             InitializeComponent();
-            panelDonnee.Location = new Point(Size.Width / 2 - panelDonnee.Width/2, Size.Height / 2 - panelDonnee.Height / 2); 
+            //panelDonnee.Location = new Point(Size.Width / 2 - panelDonnee.Width/2, Size.Height / 2 - panelDonnee.Height / 2); 
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
             g = pictureBox.CreateGraphics();
@@ -113,14 +113,17 @@ namespace MCD
         {
             if (mode == "Entite")
             {
+                debugSize();
                 PasserEnPhase_Entite_Position();
             }
             else if (mode == "Association")
             {
+                debugSize();
                 PasserEnPhase_Association_Position();
             }
             else if (mode == "Selection")
             {
+                debugSize();
                 if (mouse != "Down")
                 {
                     mcd.checkObjet(e.X, e.Y);
@@ -138,6 +141,7 @@ namespace MCD
             }
             else if (mode == "Lien")
             {
+                debugSize();
                 PasserEnPhase_Lien_Position();
             }
 
@@ -292,17 +296,16 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            int sizeX = 115;
-            int sizeY = 100;
-
-            int dX = x - sizeX / 2;
-            int dY = y - sizeY / 2;
-
             mcd.checkObjet(x, y);
             objetCurrent = mcd.GetObjetCurrent();
 
             if (objetCurrent == null)
             {
+                int sizeX = 115;
+                int sizeY = 100;
+                dX = x - sizeX / 2;
+                dY = y - sizeY / 2;
+
                 mcd.newEntite(dX, dY, sizeX, sizeY, ("E" + x + "_" + y), ("E" + x + "_" + y));
                 objetCurrent = mcd.GetObjetCurrent();
                 mcd.drawCurrentObjet(dX, dY);
@@ -357,8 +360,20 @@ namespace MCD
 
         private void ItererPhase_Association_Nouvelle()
         {
-            mcd.newAssociation(x, y, 100, 50, ("A" + x + "_" + y), ("A" + x + "_" + y));
-            mcd.drawCurrentObjet(x, y);
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if (objetCurrent == null)
+            {
+                int sizeX = 115;
+                int sizeY = 100;
+                dX = x - sizeX / 2;
+                dY = y - sizeY / 2;
+
+                mcd.newAssociation(dX, dY, sizeX, sizeY, ("A" + x + "_" + y), ("A" + x + "_" + y));
+                objetCurrent = mcd.GetObjetCurrent();
+                mcd.drawCurrentObjet(dX, dY);
+            }
         }
 
         private void PasserEnPhase_Association_Position()
@@ -370,8 +385,11 @@ namespace MCD
         {
             if (mouse == "Down")
             {
+                objetCurrent.x = x - objetCurrent.sizeX / 2;
+                objetCurrent.y = y - objetCurrent.sizeY / 2;
+                is_in_limit();
                 mcd.redrawPage();
-                mcd.drawCurrentObjet(x, y);
+                objetCurrent.draw(g);
             }
         }
 
@@ -522,6 +540,7 @@ namespace MCD
                 if (mcd.checkObjet(e.X, e.Y))
                 {
                     panelDonnee.Visible = true;
+                    panelDonnee.Enabled = true;
                     NameObjet.Text = objetCurrent.name;
                     TextBoxAttribut.Text = objetCurrent.attributs;
                     mode = "EcritDonnee";
@@ -533,6 +552,7 @@ namespace MCD
         private void bt_off_Click(object sender, EventArgs e)
         {
             panelDonnee.Visible = false;
+            panelDonnee.Enabled = false;
             mode = "Selection";
             changeEnabled(true);
             if (mcd.objetCurrent is Entite)
@@ -591,9 +611,16 @@ namespace MCD
         public void is_in_limit()
         {
             if (objetCurrent.x < 0) { objetCurrent.x = 3; }
-            if (objetCurrent.y < 45) { objetCurrent.y = 45; }
+            if (objetCurrent.y < 75) { objetCurrent.y = 75; }
             if (objetCurrent.x + objetCurrent.sizeX > pictureBox1.Width) { objetCurrent.x = pictureBox1.Width - objetCurrent.sizeX - 3; }
             if (objetCurrent.y + objetCurrent.sizeY + 25 > pictureBox1.Height) { objetCurrent.y = pictureBox1.Height - objetCurrent.sizeY - 3; }
+        }
+
+        public void debugSize()
+        {
+            int maxsizeX = pictureBox.Width;
+            int maxsizeY = pictureBox.Height;
+            debug2.Text = "Width = " + maxsizeX + "\n" + "Height = " + maxsizeY;
         }
     }
 }

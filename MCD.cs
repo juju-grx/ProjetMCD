@@ -103,7 +103,9 @@ namespace MCD
         public void clearPage()
         {
             g = pictureBox.CreateGraphics();
-            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
+            int maxsizeX = pictureBox.Width;
+            int maxsizeY = pictureBox.Height;
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, maxsizeX, maxsizeY));
         }
 
         //verif ----------------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ namespace MCD
             id = Id;
             sizeX = SizeX;
             sizeY = SizeY;
-            pen = new Pen(Color.Black, 2);
+            pen = new Pen(Color.Black, 1);
             code = Code;
             name = Name;
 
