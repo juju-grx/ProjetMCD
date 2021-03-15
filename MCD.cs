@@ -8,7 +8,7 @@ namespace MCD
     class MCD
     {
         Graphics g;
-        public Array associationlien ;
+        //public Array associationlien ;
         public int countEntite = 0;
         public int countAssociation = 0;
         public int countLien = 0;
@@ -56,9 +56,11 @@ namespace MCD
 
             tabAssociation[countAssociation] = association;
         }
-        public void newLien(int X, int Y, int SizeX, int SizeY,Entite entiteliee,Association associationliee, string Code, string Name)
+        public void newLien(int X, int Y, int SizeX, int SizeY,Objet Objetdepart,Objet Objetarrive, string Code, string Name)
         {
-            lien = new Lien (X, Y, countLien, SizeX, SizeY,entiteliee, associationliee, Code, Name);
+
+
+            lien = new Lien (X, Y, countLien, SizeX, SizeY,Objetdepart,Objetarrive , Code, Name);
 
             tabLien[countLien] = lien;
             lienCurrent = lien;
@@ -112,21 +114,23 @@ namespace MCD
         }
         public void setphasedef(int x, int y)
         {
+
             if ((lienCurrent != null) && (lienCurrent.objetdepart != null))
             {
+                objetCourant = GetObjetCurrent();
                 int i;
                 if (checkObjet(x, y))
                 {
-                    if (entiteCurrent != null)
-                    {
-                        lienCurrent.sizeX = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
-                        lienCurrent.sizeY = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
-                    }
-                    else if (associationCurrent != null)
-                    {
-                        lienCurrent.sizeX = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
-                        lienCurrent.sizeY = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
-                    }
+                    //if (entiteCurrent != null)
+                    //{
+                        lienCurrent.sizeX = (objetCourant.x * 2 + objetCourant.sizeX) / 2;
+                        lienCurrent.sizeY = (objetCourant.y * 2 + objetCourant.sizeY) / 2;
+                    //}
+                   // else if (associationCurrent != null)
+                    //{
+                    //    lienCurrent.sizeX = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
+                     //   lienCurrent.sizeY = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
+                    //}
                     if ((countLien != 0) || (countLien != 1))
                     {
                         for (i = 0; i < countLien - 1; i++)
@@ -163,22 +167,10 @@ namespace MCD
         {
             if (checkObjet(x, y))
             {
-                entiteCurrent = GetEntiteCurrent();
-                associationCurrent = GetAssociationCurrent();
+               objetCourant = GetObjetCurrent();
 
                 newLien(x, y, x, y, null, null , ("L" + x + "_" + y), ("L" + x + "_" + y));
                 lienCurrent = GetLienCurrent();
-
-                if (entiteCurrent != null)
-                {
-                    lienCurrent.x = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
-                    lienCurrent.y = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
-                }
-                else if (associationCurrent != null)
-                {
-                    lienCurrent.x = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
-                    lienCurrent.y = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
-                }
                 lienCurrent.x = (objetCourant.x * 2 + objetCourant.sizeX) / 2;
                 lienCurrent.y = (objetCourant.y * 2 + objetCourant.sizeY) / 2;
                 defineliencurr(lienCurrent);
@@ -188,6 +180,31 @@ namespace MCD
         {
             tabLien[countLien] = lienactu;
             countLien += 1;
+        }
+        public Objet getcodeObjet (string code)
+        {
+            int i = 0;
+            if (code.Contains("E"))
+            {
+                for (i = 0; i < countEntite; i++)
+                {
+                    if (tabEntite[countEntite].code == code)
+                    {
+                        return tabEntite[countEntite];
+                    }
+                }
+            }
+            else if (code.Contains("A"))
+            {
+                for (i = 0; i < countAssociation; i++)
+                {
+                    if (tabAssociation[countAssociation].code == code)
+                    {
+                        return tabAssociation[countAssociation];
+                    }
+                }
+            }
+                return null;
         }
         
             //affichage -------------------------------------------------------------------------------
@@ -414,6 +431,20 @@ namespace MCD
                     }
                 }
             }
+            for (int i = 0; i < countLien; i++)
+            {
+                if (tabLien[i] != null)
+                {
+                    if (tabLien[i].attributs != null)
+                    {
+                        file.WriteLine(tabLien[i].makeRecording() + "\n\t" + tabLien[i].attributsCorrect()); //Ecriture dans le fichier stockant les valeurs du lien avec attributs
+                    }
+                    else
+                    {
+                        file.WriteLine(tabLien[i].makeRecording()); //Ecriture dans le fichier stockant les valeurs du lien
+                    }
+                }
+            }
 
         }
 
@@ -482,7 +513,8 @@ namespace MCD
                         }
                         else if (line.Contains("L"))
                         {
-                                newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], objet[1]);
+
+                            newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]),getcodeObjet(objet[6]),getcodeObjet(objet[7]), objet[0], objet[1]);
                                 countLien += 1;
                                 objetCurrent = "L";
                         }
@@ -512,6 +544,7 @@ namespace MCD
         {
             if (entiteCurrent != null)
             {
+                objetCourant = entiteCurrent;
                 return entiteCurrent;
             }
             else if (associationCurrent != null)

@@ -16,6 +16,8 @@ namespace MCD
         {
             x = X;
             y = Y;
+            sizeX = SizeX;
+            sizeY = SizeY;
             id = Id;
             pen = new Pen(Color.Black, 3);
             code = Code;
@@ -56,7 +58,12 @@ namespace MCD
 
         public string makeRecording()
         {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
+            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY + " " + objetdepart.code + " " + objetarrive.code);
+        }
+        public string attributsCorrect()
+        {
+            string _attributs = attributs.Replace("\n", ";");
+            return _attributs;
         }
     }
 }
