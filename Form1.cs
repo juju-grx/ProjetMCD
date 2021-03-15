@@ -207,6 +207,7 @@ namespace MCD
             {
                 if (entiteCurrent != null)
                 {
+                    int i;
                     entiteCurrent.x = x - dX;
                     entiteCurrent.y = y - dY;
                     mcd.reloadPage();
@@ -260,32 +261,7 @@ namespace MCD
         {
             if (mode == "Lien")
             {
-                if (mcd.checkObjet(x, y))
-                {
-                    entiteCurrent = mcd.GetEntiteCurrent();
-                    associationCurrent = mcd.GetAssociationCurrent();
-
-                    mcd.newLien(x, y, x, y, ("L" + x + "_" + y), ("L" + x + "_" + y));
-                    lienCurrent = mcd.GetLienCurrent();
-
-                    if (entiteCurrent != null)
-                    {
-                        lienCurrent.objetdepart = entiteCurrent.code;
-                        lienCurrent.x = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
-                        lienCurrent.y = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
-                    }
-                    else if (associationCurrent != null)
-                    {
-                        lienCurrent.objetdepart = associationCurrent.code;
-                        lienCurrent.x = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
-                        lienCurrent.y = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
-                    }
-                    Lien[] TabLien = new Lien[1000];
-                    TabLien = mcd.GetTabLien();
-                    TabLien[mcd.countLien] = lienCurrent;
-                    mcd.countLien += 1;
-                    // mcd.drawCurrentLien(lienCurrent.x, lienCurrent.y);
-                }
+                mcd.setphasedep(x,y); 
             }
         }
 
@@ -315,75 +291,13 @@ namespace MCD
 
         private void ItererPhase_Lien_PositionDefinitive()
         {
-            int i = 0;
             if (mode == "Lien")
             {
-                if (mcd.checkObjet(x, y))
-                {
-                    entiteCurrent = mcd.GetEntiteCurrent();
-                    associationCurrent = mcd.GetAssociationCurrent();
-
-                    lienCurrent = mcd.GetLienCurrent();
-
-                    if (entiteCurrent != null)
-                    {
-                        lienCurrent.objetarrive = entiteCurrent.code;
-                        lienCurrent.sizeX = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
-                        lienCurrent.sizeY = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
-                    }
-                    else if (associationCurrent != null)
-                    {
-                        lienCurrent.objetarrive = associationCurrent.code;
-                        lienCurrent.sizeX = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
-                        lienCurrent.sizeY = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
-                    }
-                    Lien[] TabLien = new Lien[1000];
-                    Entite[] TabEntite = new Entite[1000];
-                    TabLien = mcd.GetTabLien();
-                    TabEntite = mcd.GetTabEntite();
-
-                    for (i=0; i < mcd.countLien; i++ )
-                    {
-                        if ((TabLien[i].objetdepart== lienCurrent.objetdepart) && (TabLien[i].objetarrive == lienCurrent.objetarrive))
-                        {
-                            deldupli();
-                        }
-                    }
-                    if (lienCurrent.objetdepart == lienCurrent.objetarrive)
-                    {
-                        g = pictureBox.CreateGraphics();
-                        Pen blackPen = new Pen(Color.Black, 3);
-                        Rectangle rect = new Rectangle(entiteCurrent.x, entiteCurrent.y, entiteCurrent.sizeX, entiteCurrent.sizeY);
-                        g.DrawArc(blackPen, rect, mcd.startAngle, mcd.sweepAngle);
-
-                    }
-                 /*if (lienCurrent.objetdepart is Entite e)
-                    {
-
-                    } */
-                    mcd.reloadPage();
-                    PasserEnPhase_Lien_Attente();
-                    lienCurrent = null;
-
-                }
+                mcd.setphasedef(x, y);
             }
+            PasserEnPhase_Lien_Attente();
         }
-        public void deldupli()
-        {
-            Lien[] TabLien = new Lien[1000];
-            TabLien = mcd.GetTabLien();
 
-            if (mode == "lien")
-            {
-                for (int i = 0; i < mcd.countLien; i++)
-                {
-                    if (TabLien[i] == lienCurrent)
-                    {
-                        TabLien[i] = null;
-                    }
-                }
-            }
-        }
 
         //Entite ----------------------------------------------------------------
 

@@ -6,10 +6,10 @@ namespace MCD
 {
     class Association : Objet
     {
-        public Array assolien;
+
         Graphics g;
 
-        public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name, Array Assolien)
+        public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
         {
             
             x = X;
@@ -20,7 +20,7 @@ namespace MCD
             pen = new Pen(Color.Black, 3);
             code = Code;
             name = Name;
-            assolien = Assolien;
+
         }
         
 
@@ -52,7 +52,7 @@ namespace MCD
 
         public string makeRecording()
         {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY + " " + assolien );
+            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY + " ");
         }
 
         public string attributsCorrect()

@@ -8,18 +8,15 @@ namespace MCD
     class Lien : Objet
     {
         Graphics g;
-        public string objetdepart;
-        public string objetarrive;
-        Association associationliee;
+        public Objet objetdepart;
+        public Objet objetarrive;
         MCD mcd;
 
-        public Lien(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
+        public Lien(int X, int Y, int Id, int SizeX, int SizeY,Objet Objetdepart, Objet Objetarrive, string Code, string Name)
         {
             x = X;
             y = Y;
             id = Id;
-            sizeX = SizeX;
-            sizeY = SizeY;
             pen = new Pen(Color.Black, 3);
             code = Code;
             name = Name;
@@ -53,29 +50,6 @@ namespace MCD
             }
             sr.Close();
             return true;
-        }
-        public void centrerLien()
-        {
-            if (objetdepart.Contains("E"))
-            {
-               for (int i=0; i <mcd.countEntite; i++)
-                {
-
-                }
-            }
-            else if (objetdepart == "A")
-            {
-                for (int i = 0; i < mcd.countAssociation; i++)
-                {
-                    associationliee = mcd.GetTabAssociation()[i]; 
-                    if (associationliee.code==objetdepart)
-                    {
-                        x = associationliee.x;
-                        y = associationliee.y;
-                    }
-                    
-                }
-            }
         }
 
         // Record ----------------------------------------------------

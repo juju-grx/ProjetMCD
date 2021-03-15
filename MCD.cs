@@ -20,6 +20,7 @@ namespace MCD
         private Entite entiteCurrent;
         private Association associationCurrent;
         private Lien lienCurrent;
+        private Objet objetCourant;
 
         private Entite entitePrevious;
         private Association associationPrevious;
@@ -51,13 +52,13 @@ namespace MCD
 
         public void newAssociation(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
-            association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name, associationlien);
+            association = new Association(X, Y, countAssociation, SizeX, SizeY, Code, Name);
 
             tabAssociation[countAssociation] = association;
         }
-        public void newLien(int X, int Y, int SizeX, int SizeY, string Code, string Name)
+        public void newLien(int X, int Y, int SizeX, int SizeY,Entite entiteliee,Association associationliee, string Code, string Name)
         {
-            lien = new Lien (X, Y, countLien, SizeX, SizeY, Code, Name);
+            lien = new Lien (X, Y, countLien, SizeX, SizeY,entiteliee, associationliee, Code, Name);
 
             tabLien[countLien] = lien;
             lienCurrent = lien;
@@ -97,6 +98,97 @@ namespace MCD
             }
             reloadPage();
         }
+        public void deldupli()
+        {
+            tabLien = GetTabLien();
+
+                for (int i = 0; i < countLien; i++)
+                {
+                    if (tabLien[i] == lienCurrent)
+                    {
+                        tabLien[i] = null;
+                    }
+                }
+        }
+        public void setphasedef(int x, int y)
+        {
+            if ((lienCurrent != null) && (lienCurrent.objetdepart != null))
+            {
+                int i;
+                if (checkObjet(x, y))
+                {
+                    if (entiteCurrent != null)
+                    {
+                        lienCurrent.sizeX = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
+                        lienCurrent.sizeY = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
+                    }
+                    else if (associationCurrent != null)
+                    {
+                        lienCurrent.sizeX = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
+                        lienCurrent.sizeY = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
+                    }
+                    if ((countLien != 0) || (countLien != 1))
+                    {
+                        for (i = 0; i < countLien - 1; i++)
+                        {
+
+                            if (tabLien[i] != null)
+                            {
+                                if (((tabLien[i].objetdepart == lienCurrent.objetdepart) && (tabLien[i].objetarrive == lienCurrent.objetarrive)) || ((tabLien[i].objetdepart==lienCurrent.objetarrive) && (tabLien[i].objetarrive==lienCurrent.objetdepart))) 
+                                {
+                                    deldupli();
+                                }
+                            }
+                        }
+                    }
+                   // if (lienCurrent.objetdepart == lienCurrent.objetarrive)
+                   // {
+                   //    g = pictureBox.CreateGraphics();
+                   //     Pen blackPen = new Pen(Color.Black, 3);
+                   //     Rectangle rect = new Rectangle(entiteCurrent.x, entiteCurrent.y, entiteCurrent.sizeX, entiteCurrent.sizeY);
+                   //     g.DrawArc(blackPen, rect, startAngle, sweepAngle);
+
+                    
+                }
+                reloadPage();
+
+                if (lienCurrent.objetarrive != null)
+                {
+                    lienCurrent = null;
+                }
+            }
+            
+        }
+        public void setphasedep(int x,int y)
+        {
+            if (checkObjet(x, y))
+            {
+                entiteCurrent = GetEntiteCurrent();
+                associationCurrent = GetAssociationCurrent();
+
+                newLien(x, y, x, y, null, null , ("L" + x + "_" + y), ("L" + x + "_" + y));
+                lienCurrent = GetLienCurrent();
+
+                if (entiteCurrent != null)
+                {
+                    lienCurrent.x = (entiteCurrent.x * 2 + entiteCurrent.sizeX) / 2;
+                    lienCurrent.y = (entiteCurrent.y * 2 + entiteCurrent.sizeY) / 2;
+                }
+                else if (associationCurrent != null)
+                {
+                    lienCurrent.x = (associationCurrent.x * 2 + associationCurrent.sizeX) / 2;
+                    lienCurrent.y = (associationCurrent.y * 2 + associationCurrent.sizeY) / 2;
+                }
+                lienCurrent.x = (objetCourant.x * 2 + objetCourant.sizeX) / 2;
+                lienCurrent.y = (objetCourant.y * 2 + objetCourant.sizeY) / 2;
+                defineliencurr(lienCurrent);
+            }
+        }
+        public void defineliencurr(Lien lienactu)
+        {
+            tabLien[countLien] = lienactu;
+            countLien += 1;
+        }
         
             //affichage -------------------------------------------------------------------------------
 
@@ -133,13 +225,13 @@ namespace MCD
             {
                 if (tabLien[i] != null)
                 {
-                    if (tabLien[i].objetdepart == tabLien[i].objetarrive)
-                    {
-                        g = pictureBox.CreateGraphics();
-                        Pen blackPen = new Pen(Color.Black, 3);
-                        Rectangle rect = new Rectangle(entiteCurrent.x, entiteCurrent.y, entiteCurrent.sizeX, entiteCurrent.sizeY); // essayer d voir avec un DrawCurve
-                        g.DrawArc(blackPen, rect, startAngle, sweepAngle);
-                    }
+                    //if (tabLien[i].objetdepart == tabLien[i].objetarrive)
+                    //{
+                      //   g = pictureBox.CreateGraphics();
+                        //Pen blackPen = new Pen(Color.Black, 3);
+                        //Rectangle rect = new Rectangle(entiteCurrent.x, entiteCurrent.y, entiteCurrent.sizeX, entiteCurrent.sizeY); // essayer d voir avec un DrawCurve
+                        //g.DrawArc(blackPen, rect, startAngle, sweepAngle);
+                    //}
                     tabLien[i].drawLien(); // redessine le lien stocké à l'emplacement i de tabLien
                 }
             }
@@ -415,6 +507,18 @@ namespace MCD
         public Lien GetLienCurrent()
         {
             return lienCurrent;
+        }
+        public Objet GetObjetCurrent()
+        {
+            if (entiteCurrent != null)
+            {
+                return entiteCurrent;
+            }
+            else if (associationCurrent != null)
+            {
+                return associationCurrent;
+            }
+            else return null;
         }
         public Association[] GetTabAssociation()
         {
