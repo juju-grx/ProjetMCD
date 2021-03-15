@@ -4,12 +4,12 @@ namespace MCD
 {
     class Objet
     {
+        public int id;
         public int x;
         public int y;
-        public int id;
-        public int sizeX = 100;
-        public int sizeY = 125;
-        public bool redimensionnement = false;
+        public int sizeX;
+        public int sizeY;
+        public bool resize = false;
         public string name;
         public string code;
         public string attributs;
@@ -23,7 +23,41 @@ namespace MCD
             {
                 return true;
             }
+            resize = false;
             return false;
         }
+
+        // Record ----------------------------------------------------
+
+        public string makeRecording()
+        {
+            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
+        }
+
+        public string attributsCorrect()
+        {
+            string _attributs = attributs.Replace("\n", ";");
+            return _attributs;
+        }
+
+        // Draw --------------------------------------------------------
+
+        public string debugEntite()
+        {
+            string var = ("id = " + id + "\n"
+                        + "y = " + y + "\n"
+                        + "x = " + x + "\n"
+                        + "sizeX = " + sizeX + "\n"
+                        + "sizeY = " + sizeY + "\n"
+                        + "code = " + code);
+
+            return var;
+        }
+
+        public virtual void drawRezise(Graphics g) { }
+
+        public virtual void draw(Graphics g) { }
+
+        public virtual void redimensionnement(Graphics g) { }
     }
 }

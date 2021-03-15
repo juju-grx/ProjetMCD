@@ -58,3 +58,11 @@ P:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.CoreComp
 P:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.dll
 P:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.pdb
 P:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.genruntimeconfig.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csprojAssemblyReference.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.resources
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.GenerateResource.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.AssemblyInfoInputs.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.AssemblyInfo.cs
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.CoreCompileInputs.cache
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.dll
+C:\Users\girojul\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.pdb

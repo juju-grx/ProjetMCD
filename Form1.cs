@@ -7,6 +7,8 @@ namespace MCD
 {
     public partial class Form1 : Form
     {
+        Graphics g;
+
         public static PictureBox pictureBox = null;
         public static RichTextBox richTextBox = null;
 
@@ -17,8 +19,7 @@ namespace MCD
 
         MCD mcd;
 
-        Entite entiteCurrent;
-        Association associationCurrent;
+        Objet objetCurrent;
 
         string mode = "Selection";
         string PhaseCourante = "null";
@@ -30,7 +31,9 @@ namespace MCD
             InitializeComponent();
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
-            mcd = new MCD();
+            g = pictureBox.CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            mcd = new MCD(g);
         }
         //Bouton ---------------------------------------------------------------
 
@@ -117,22 +120,17 @@ namespace MCD
             }
             else if (mode == "Selection")
             {
-                mcd.checkObjet(e.X, e.Y);
-                if (entiteCurrent != null)
+                if (mouse != "Down")
                 {
-                    debug.Enabled = true;
-                    debug.Visible = true;
-                    debug.Text = entiteCurrent.debugEntite(); 
+                    mcd.checkObjet(e.X, e.Y);
                 }
-                else if (associationCurrent != null)
+                if (objetCurrent != null)
                 {
-                    debug.Enabled = true;
                     debug.Visible = true;
-                    debug.Text = associationCurrent.debugEntite();
+                    debug.Text = objetCurrent.debugEntite();
                 }
-                else 
-                { 
-                    debug.Enabled = false;
+                else
+                {
                     debug.Visible = false;
                 }
                 PasserEnPhase_Selection_Position();
@@ -189,18 +187,16 @@ namespace MCD
 
         private void ItererPhase_Selection_Nouvelle()
         {
-            entiteCurrent = mcd.GetEntiteCurrent();
-            associationCurrent = mcd.GetAssociationCurrent();
 
-            if (entiteCurrent != null)
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if (objetCurrent != null)
             {
-                dX = x - entiteCurrent.x;
-                dY = y - entiteCurrent.y;
-            }
-            else if (associationCurrent != null)
-            {
-                dX = x - associationCurrent.x;
-                dY = y - associationCurrent.y;
+                objetCurrent.resize = true;
+                dX = x - objetCurrent.x;
+                dY = y - objetCurrent.y;
+                mcd.redrawPage();
             }
         }
 
@@ -213,19 +209,13 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                if (entiteCurrent != null)
+                if (objetCurrent != null)
                 {
-                    entiteCurrent.x = x - dX;
-                    entiteCurrent.y = y - dY;
-                    mcd.reloadPage(entiteCurrent.x, entiteCurrent.y);
-                    entiteCurrent.draw();
-                }
-                else if (associationCurrent != null)
-                {
-                    associationCurrent.x = x - dX;
-                    associationCurrent.y = y - dY;
-                    mcd.reloadPage(associationCurrent.x, associationCurrent.y);
-                    associationCurrent.draw();
+                    objetCurrent.x = x - dX;
+                    objetCurrent.y = y - dY;
+                    is_in_limit();
+                    mcd.redrawPage();
+                    objetCurrent.draw(g);
                 }
             }
         }
@@ -301,8 +291,21 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            mcd.newEntite(x, y, 115, 97, ("E" + x + "_" + y), ("E" + x + "_" + y));
-            mcd.drawCurrentEntite(x, y);
+            int sizeX = 115;
+            int sizeY = 100;
+
+            int dX = x - sizeX / 2;
+            int dY = y - sizeY / 2;
+
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if (objetCurrent == null)
+            {
+                mcd.newEntite(dX, dY, sizeX, sizeY, ("E" + x + "_" + y), ("E" + x + "_" + y));
+                objetCurrent = mcd.GetObjetCurrent();
+                mcd.drawCurrentObjet(dX, dY);
+            }
         }
 
         private void PasserEnPhase_Entite_Position()
@@ -314,8 +317,11 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(entiteCurrent.x , entiteCurrent.y);
-                mcd.drawCurrentEntite(x, y);
+                objetCurrent.x = x - objetCurrent.sizeX / 2;
+                objetCurrent.y = y - objetCurrent.sizeY / 2;
+                is_in_limit();
+                mcd.redrawPage();
+                objetCurrent.draw(g);
             }
         }
 
@@ -326,6 +332,7 @@ namespace MCD
 
         private void ItererPhase_Entite_PositionDefinitive()
         {
+            objetCurrent = null;
             mcd.countEntite += 1;
             PasserEnPhase_Entite_Attente();
         }
@@ -350,7 +357,7 @@ namespace MCD
         private void ItererPhase_Association_Nouvelle()
         {
             mcd.newAssociation(x, y, 100, 50, ("A" + x + "_" + y), ("A" + x + "_" + y));
-            mcd.drawCurrentAssociation(x, y);
+            mcd.drawCurrentObjet(x, y);
         }
 
         private void PasserEnPhase_Association_Position()
@@ -362,8 +369,8 @@ namespace MCD
         {
             if (mouse == "Down")
             {
-                mcd.reloadPage(associationCurrent.x, associationCurrent.y);
-                mcd.drawCurrentAssociation(x, y);
+                mcd.redrawPage();
+                mcd.drawCurrentObjet(x, y);
             }
         }
 
@@ -514,16 +521,8 @@ namespace MCD
                 if (mcd.checkObjet(e.X, e.Y))
                 {
                     panelDonnee.Visible = true;
-                    if(mcd.objetCurrent == "Entite")
-                    {
-                        NameObjet.Text = entiteCurrent.name;
-                        TextBoxAttribut.Text = entiteCurrent.attributs;
-                    }
-                    else if (mcd.objetCurrent == "Association")
-                    {
-                        NameObjet.Text = associationCurrent.name;
-                        TextBoxAttribut.Text = associationCurrent.attributs;
-                    }
+                    NameObjet.Text = objetCurrent.name;
+                    TextBoxAttribut.Text = objetCurrent.attributs;
                     mode = "EcritDonnee";
                     changeEnabled(false);
                 }
@@ -535,37 +534,38 @@ namespace MCD
             panelDonnee.Visible = false;
             mode = "Selection";
             changeEnabled(true);
-            if (mcd.objetCurrent == "Entite")
+            if (mcd.objetCurrent is Entite)
             {
-                entiteCurrent.name = NameObjet.Text;
-                entiteCurrent.attributs = TextBoxAttribut.Text;
-                String[] objet = entiteCurrent.attributs.Split('\n');
-                if(entiteCurrent.name.Length * 12 > 115)
+                objetCurrent.name = NameObjet.Text;
+                String[] objet = TextBoxAttribut.Text.Split('\n');
+                objetCurrent.attributs = objet[0];
+                for (int i = 1; i < objet.Length; i++)
                 {
-                    entiteCurrent.sizeX = entiteCurrent.name.Length * 12;
-                }
-                if(objet[0] != null)
-                {
-                    if(5 + objet[0].Length * 11 > 100)
+                    if (objet[i] != "")
                     {
-                        entiteCurrent.sizeX = 5 + objet[0].Length * 11;
+                        objetCurrent.attributs = objetCurrent.attributs + '\n' + objet[i];
                     }
                 }
-                if(objet.Length > 4)
+                if (objetCurrent.attributs == "")
                 {
-                    entiteCurrent.sizeY = 97 + (objet.Length - 4) * 28;
+                    objetCurrent.attributs = null;
                 }
+                objetCurrent.redimensionnement(g);
+
+                objetCurrent = null;
             }
-            else if (mcd.objetCurrent == "Association")
+            else if (mcd.objetCurrent is Association)
             {
-                associationCurrent.name = NameObjet.Text;
-                associationCurrent.attributs = TextBoxAttribut.Text;
+                objetCurrent.name = NameObjet.Text;
+                objetCurrent.attributs = TextBoxAttribut.Text;
+                objetCurrent = null;
             }
+            mcd.redrawPage();
         }
-        
+
         private void form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if ( Delete && (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete))
+            if (Delete && (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete))
             {
                 mcd.delObjet();
             }
@@ -573,19 +573,26 @@ namespace MCD
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if(mode == "Selection")
+            if (mode == "Selection")
             {
                 if (mcd.checkObjet(x, y))
                 {
                     Delete = true;
-                    mcd.reloadPage(810, 420);
                 }
                 else if (mcd.checkObjet(x, y) == false)
                 {
                     Delete = false;
-                    mcd.reloadPage(810, 420);
                 }
+                mcd.redrawPage();
             }
+        }
+
+        public void is_in_limit()
+        {
+            if (objetCurrent.x < 0) { objetCurrent.x = 3; }
+            if (objetCurrent.y < 45) { objetCurrent.y = 45; }
+            if (objetCurrent.x + objetCurrent.sizeX > pictureBox1.Width) { objetCurrent.x = pictureBox1.Width - objetCurrent.sizeX - 3; }
+            if (objetCurrent.y + objetCurrent.sizeY + 25 > pictureBox1.Height) { objetCurrent.y = pictureBox1.Height - objetCurrent.sizeY - 3; }
         }
     }
 }

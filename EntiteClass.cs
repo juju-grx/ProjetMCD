@@ -1,17 +1,15 @@
 ﻿using System;
-using System.IO;
 using System.Drawing;
-using static MCD.Form1;
 
 namespace MCD
 {
     class Entite : Objet
     {
-        Graphics g;
+        public int sizeXMin = 115;
+        public int sizeYMin = 100;
 
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-
 
         public Entite(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
         {
@@ -20,24 +18,31 @@ namespace MCD
             id = Id;
             sizeX = SizeX;
             sizeY = SizeY;
-            pen = new Pen(Color.Black, 3);
+            pen = new Pen(Color.Black, 2);
             code = Code;
             name = Name;
+
+            if (sizeX < sizeXMin)
+            {
+                sizeX = sizeXMin;
+            }
+            if (sizeY < sizeYMin)
+            {
+                sizeY = sizeYMin;
+            }
         }
 
         //affichage ---------------------------------------------------
 
-        public void draw()
+        public override void draw(Graphics g)
         {
-            g = pictureBox.CreateGraphics();
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
             g.DrawString(name, drawFont, drawBrush, x + 2, y);
 
             if (attributs != null)
             {
-                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + (sizeY / 5) + 2);
+                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27);
             }
+
             Point[] pointsTitre =
                         {
                         new Point(x, y),
@@ -56,33 +61,69 @@ namespace MCD
                         new Point(x, y + 25)
                     };
 
-            g.DrawLines(new Pen(Color.Black, 1), pointsTitre);
-            g.DrawLines(new Pen(Color.Black, 1), pointsAttributs);
+            g.DrawLines(pen, pointsTitre);
+            g.DrawLines(pen, pointsAttributs);
+
+            if (resize == true)
+            {
+                drawRezise(g);
+            }
         }
 
-        // Record ----------------------------------------------------
-
-        public string makeRecording()
+        public override void drawRezise(Graphics g)
         {
-            return (code + " " + name + " " + x + " " + y + " " + sizeX + " " + sizeY);
+            g.DrawRectangle(pen, x - 2, y - 2, 4, 4);
+            g.DrawRectangle(pen, x + sizeX - 2, y - 2, 4, 4);
+            g.DrawRectangle(pen, x - 2, y + sizeY + 23, 4, 4);
+            g.DrawRectangle(pen, x + sizeX - 2, y + sizeY + 23, 4, 4);
         }
 
-        public string attributsCorrect()
+        public override void redimensionnement(Graphics g)
         {
-            string _attributs = attributs.Replace("\n", ";");
-            return _attributs;
-        }
+            SizeF nameSize = g.MeasureString(name, drawFont);
+            int namesize = (int)nameSize.Width;
 
-        public string debugEntite()
-        {
-            string var = ("x = "     + x     + "\n" 
-                        + "y = "     + y     + "\n" 
-                        + "id = "    + id    + "\n" 
-                        + "sizeX = " + sizeX + "\n" 
-                        + "sizeY = " + sizeY + "\n" 
-                        + "code = "  + code);
+            if (nameSize.Width > 115)
+            {
+                sizeX = namesize + 2;
+            }
+            else
+            {
+                sizeX = 115;
+            }
 
-            return var;
+            if (attributs != null)
+            {
+                String[] objet = attributs.Split('\n');
+
+                SizeF attributsSizeY = g.MeasureString(objet[0], new Font("Arial", 14));
+                int attributssizeY = (int)attributsSizeY.Height;
+
+                if (attributssizeY * objet.Length > 100)
+                {
+                    sizeY = attributssizeY * objet.Length;
+                }
+                else
+                {
+                    sizeY = 100;
+                }
+
+                for (int i = 0; i < objet.Length; i++)
+                {
+                    SizeF attributsSizeX = g.MeasureString(objet[i], new Font("Arial", 14));
+                    int attributssizeX = (int)attributsSizeX.Width;
+
+                    if (attributssizeX > sizeX)
+                    {
+                        sizeX = attributssizeX;
+                    }
+                }
+            }
+            else
+            {
+                sizeY = 100;
+            }
+
         }
     }
 }
