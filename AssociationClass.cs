@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Drawing;
-using static MCD.Form1;
 
 namespace MCD
 {
     class Association : Objet
     {
-        public int sizeXMin = 115;
-        public int sizeYMin = 100;
-
-        Font drawFont = new Font("Arial", 16);
-        SolidBrush drawBrush = new SolidBrush(Color.Black);
-
-        public Association(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
+        public Association(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
             x = X;
             y = Y;
-            id = Id;
             sizeX = SizeX;
             sizeY = SizeY;
-            pen = new Pen(Color.Black, 3);
+            sizeXMin = 115;
+            sizeYMin = 100;
+            pen = new Pen(Color.Black, 1);
             code = Code;
             name = Name;
 
@@ -37,8 +31,14 @@ namespace MCD
 
         public override void draw(Graphics g)
         {
-            g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 0, 180);
-            g.DrawArc(new Pen(Color.Black, 1), new Rectangle(x, y, sizeX, sizeY), 180, 360);
+            g.DrawArc(pen, new Rectangle(x, y, sizeX, sizeY), 0, 180);
+            g.DrawArc(pen, new Rectangle(x, y, sizeX, sizeY), 180, 360);
+
+            SizeF attributsSize = g.MeasureString(name, new Font("Arial", 14));
+            int attributssizeX = (int)attributsSize.Width;
+            int attributssizeY = (int)attributsSize.Height;
+
+            g.DrawString(name, drawFont, drawBrush, x + (sizeX / 2 - attributssizeX / 2), y + (sizeY/2 - attributssizeY / 2));
         }
     }
 }

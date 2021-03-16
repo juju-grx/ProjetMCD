@@ -173,7 +173,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelDonnee.ResumeLayout(false);
             this.panelDonnee.PerformLayout();
             this.ResumeLayout(false);

@@ -20,6 +20,7 @@ namespace MCD
         MCD mcd;
 
         Objet objetCurrent;
+        Lien LienCurrent;
 
         string mode = "Selection";
         string PhaseCourante = "null";
@@ -28,7 +29,7 @@ namespace MCD
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
             g = pictureBox.CreateGraphics();
@@ -99,7 +100,15 @@ namespace MCD
             }
             else if (mode == "Lien")
             {
-                PasserEnPhase_Lien_Nouvelle();
+                if(LienCurrent == null)
+                {
+                    PasserEnPhase_Lien_Nouvelle();
+                } 
+                else
+                {
+                    PasserEnPhase_Lien_PositionDefinitive();
+                }
+               
             }
 
             Iterer();
@@ -120,7 +129,7 @@ namespace MCD
             }
             else if (mode == "Selection")
             {
-                if(mouse != "Down")
+                if (mouse != "Down")
                 {
                     mcd.checkObjet(e.X, e.Y);
                 }
@@ -158,10 +167,6 @@ namespace MCD
             else if (mode == "Selection")
             {
                 PasserEnPhase_Selection_PositionDefinitive();
-            }
-            else if (mode == "Lien")
-            {
-                PasserEnPhase_Lien_PositionDefinitive();
             }
 
             Iterer();
@@ -213,6 +218,7 @@ namespace MCD
                 {
                     objetCurrent.x = x - dX;
                     objetCurrent.y = y - dY;
+                    mcd.ifLienLink(objetCurrent);
                     is_in_limit();
                     mcd.redrawPage();
                     objetCurrent.draw(g);
@@ -249,7 +255,20 @@ namespace MCD
 
         private void ItererPhase_Lien_Nouvelle()
         {
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
 
+            if (objetCurrent is Entite || objetCurrent is Association)
+            {
+                int dX = objetCurrent.x + objetCurrent.sizeX / 2;
+                int dY = objetCurrent.y + (objetCurrent.sizeY + 25) / 2;
+
+                mcd.newLien(dX, dY, dX, dY, "Lien-" + mcd.countLien, objetCurrent, null);
+                objetCurrent = mcd.GetObjetCurrent();
+                LienCurrent = objetCurrent as Lien;
+                mcd.redrawPage();
+                objetCurrent.draw(g);
+            }
         }
 
         private void PasserEnPhase_Lien_Position()
@@ -259,7 +278,13 @@ namespace MCD
 
         private void ItererPhase_Lien_Position()
         {
-
+            if(objetCurrent is Lien)
+            {
+                objetCurrent.sizeX = x;
+                objetCurrent.sizeY = y;
+                mcd.redrawPage();
+                objetCurrent.draw(g);
+            }
         }
 
         private void PasserEnPhase_Lien_PositionDefinitive()
@@ -269,6 +294,28 @@ namespace MCD
 
         private void ItererPhase_Lien_PositionDefinitive()
         {
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if (objetCurrent is Entite || objetCurrent is Association)
+            {
+                if(objetCurrent != LienCurrent.depart)
+                {
+                    LienCurrent.sizeX = objetCurrent.x + objetCurrent.sizeX / 2;
+                    LienCurrent.sizeY = objetCurrent.y + (objetCurrent.sizeY + 25) / 2;
+
+                    LienCurrent.arriver = objetCurrent;
+                    mcd.redrawPage();
+                    LienCurrent = null;
+                }
+                else
+                {
+                    mcd.SetObjetCurrent(LienCurrent);
+                    LienCurrent = null;
+                    mcd.delObjet();
+                }
+            }
+            
             PasserEnPhase_Lien_Attente();
         }
 
@@ -291,18 +338,18 @@ namespace MCD
 
         private void ItererPhase_Entite_Nouvelle()
         {
-            int sizeX = 115;
-            int sizeY = 100;
-
-            int dX = x - sizeX / 2;
-            int dY = y - sizeY / 2;
-
             mcd.checkObjet(x, y);
             objetCurrent = mcd.GetObjetCurrent();
 
             if(objetCurrent == null)
             {
-                mcd.newEntite(dX, dY, sizeX, sizeY, ("E" + x + "_" + y), ("E" + x + "_" + y));
+                int sizeX = 115;
+                int sizeY = 100;
+
+                int dX = x - sizeX / 2;
+                int dY = y - sizeY / 2;
+                
+                mcd.newEntite(dX, dY, sizeX, sizeY, "E" + mcd.countEntite, "Entite-" + mcd.countEntite);
                 objetCurrent = mcd.GetObjetCurrent();
                 mcd.drawCurrentObjet(dX, dY);
             }            
@@ -356,8 +403,21 @@ namespace MCD
 
         private void ItererPhase_Association_Nouvelle()
         {
-            mcd.newAssociation(x, y, 100, 50, ("A" + x + "_" + y), ("A" + x + "_" + y));
-            mcd.drawCurrentObjet(x, y);
+            mcd.checkObjet(x, y);
+            objetCurrent = mcd.GetObjetCurrent();
+
+            if (objetCurrent == null)
+            {
+                int sizeX = 115;
+                int sizeY = 100;
+
+                int dX = x - sizeX / 2;
+                int dY = y - sizeY / 2;
+
+                mcd.newAssociation(dX, dY, sizeX, sizeY, ("A" + mcd.countAssociation), ("Association-" + mcd.countAssociation));
+                objetCurrent = mcd.GetObjetCurrent();
+                mcd.drawCurrentObjet(dX, dY);
+            }
         }
 
         private void PasserEnPhase_Association_Position()
@@ -369,8 +429,11 @@ namespace MCD
         {
             if (mouse == "Down")
             {
+                objetCurrent.x = x - objetCurrent.sizeX / 2;
+                objetCurrent.y = y - objetCurrent.sizeY / 2;
+                is_in_limit();
                 mcd.redrawPage();
-                mcd.drawCurrentObjet(x, y);
+                objetCurrent.draw(g);
             }
         }
 
@@ -520,11 +583,14 @@ namespace MCD
             {
                 if (mcd.checkObjet(e.X, e.Y))
                 {
-                    panelDonnee.Visible = true;
-                    NameObjet.Text = objetCurrent.name;
-                    TextBoxAttribut.Text = objetCurrent.attributs;
-                    mode = "EcritDonnee";
-                    changeEnabled(false);
+                    if(mcd.GetObjetCurrent() is Entite)
+                    {
+                        panelDonnee.Visible = true;
+                        NameObjet.Text = objetCurrent.name;
+                        TextBoxAttribut.Text = objetCurrent.attributs;
+                        mode = "EcritDonnee";
+                        changeEnabled(false);
+                    }                
                 }
             }
         }
@@ -551,20 +617,26 @@ namespace MCD
                     objetCurrent.attributs = null;
                 }
                 objetCurrent.redimensionnement(g);
-
-                objetCurrent = null;
             }
             else if (mcd.objetCurrent is Association)
             {
                 objetCurrent.name = NameObjet.Text;
                 objetCurrent.attributs = TextBoxAttribut.Text;
-                objetCurrent = null;
             }
-            mcd.redrawPage();
         }
         
         private void form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (mode == "Lien")
+            {
+                if(e.KeyCode == Keys.Escape)
+                {
+                    LienCurrent = null;
+                    mcd.delObjet();
+                    mode = "Selection";
+                    mcd.redrawPage();
+                }
+            }
             if ( Delete && (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete))
             {
                 mcd.delObjet();

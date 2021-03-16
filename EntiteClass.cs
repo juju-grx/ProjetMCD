@@ -1,30 +1,23 @@
-﻿using System;
+﻿ using System;
 using System.Drawing;
 
 namespace MCD
 {
     class Entite : Objet
     {
-        public int sizeXMin = 115;
-        public int sizeYMin = 100;
-
-        Font drawFont = new Font("Arial", 16);
-        SolidBrush drawBrush = new SolidBrush(Color.Black);
-
-        Pen pen = new Pen(Color.Black, 1);
-
-        public Entite(int X, int Y, int Id, int SizeX, int SizeY, string Code, string Name)
+        public Entite(int X, int Y, int SizeX, int SizeY, string Code, string Name)
         {
             x = X;
             y = Y;
-            id = Id;
             sizeX = SizeX;
             sizeY = SizeY;
-            pen = new Pen(Color.Black, 3);
+            sizeXMin = 115;
+            sizeYMin = 100;
+            pen = new Pen(Color.Black, 1);
             code = Code;
             name = Name;
 
-            if(sizeX < sizeXMin)
+            if (sizeX < sizeXMin)
             {
                 sizeX = sizeXMin;
             }
@@ -36,14 +29,9 @@ namespace MCD
 
         //affichage ---------------------------------------------------
 
-        public override  void draw(Graphics g)
+        public override void draw(Graphics g)
         {
-            g.DrawString(name, drawFont, drawBrush, x + 2, y);
-
-            if (attributs != null)
-            {
-                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27);
-            }
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(x, y, sizeX, sizeY + 25));
 
             Point[] pointsTitre =
                         {
@@ -66,7 +54,17 @@ namespace MCD
             g.DrawLines(pen, pointsTitre);
             g.DrawLines(pen, pointsAttributs);
 
-            if(resize == true)
+            SizeF attributsSizeX = g.MeasureString(name, new Font("Arial", 14));
+            int attributssizeX = (int)attributsSizeX.Width;
+
+            g.DrawString(name, drawFont, drawBrush, x + (sizeX / 2 - attributssizeX / 2), y);
+
+            if (attributs != null)
+            {
+                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27);
+            }
+
+            if (resize == true)
             {
                 drawRezise(g);
             }
@@ -74,10 +72,10 @@ namespace MCD
 
         public override void drawRezise(Graphics g) 
         {
-            g.DrawRectangle(pen, x - 2        , y - 2, 4, 4);
-            g.DrawRectangle(pen, x + sizeX - 2, y - 2, 4, 4);
-            g.DrawRectangle(pen, x - 2        , y + sizeY + 23, 4, 4);
-            g.DrawRectangle(pen, x + sizeX - 2, y + sizeY + 23, 4, 4);
+            g.DrawRectangle(penResize, x - 2        , y - 2, 4, 4);
+            g.DrawRectangle(penResize, x + sizeX - 2, y - 2, 4, 4);
+            g.DrawRectangle(penResize, x - 2        , y + sizeY + 23, 4, 4);
+            g.DrawRectangle(penResize, x + sizeX - 2, y + sizeY + 23, 4, 4);
         }
 
         public override void redimensionnement(Graphics g)
@@ -87,10 +85,11 @@ namespace MCD
 
             if (nameSize.Width > 115) 
             {
-                sizeX = namesize + 2; 
+                sizeXMin = sizeX = namesize + 10; 
+                
             } else 
             {
-                sizeX = 115;
+                sizeXMin = sizeX = 115;
             }
 
             if (attributs != null)
@@ -102,10 +101,10 @@ namespace MCD
 
                 if(attributssizeY * objet.Length > 100)
                 {
-                    sizeY = attributssizeY * objet.Length;
+                    sizeYMin = sizeY = attributssizeY * objet.Length;
                 } else
                 {
-                    sizeY = 100;
+                    sizeYMin = sizeY = 100;
                 }
 
                 for (int i = 0; i <objet.Length; i++)
@@ -115,13 +114,13 @@ namespace MCD
 
                     if (attributssizeX > sizeX)
                     {
-                        sizeX = attributssizeX;
+                        sizeXMin = sizeX = attributssizeX + 5;
                     }
                 }
             }
             else
             {
-                sizeY = 100;
+                sizeYMin = sizeY = 100;
             }
             
         }

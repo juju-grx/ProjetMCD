@@ -4,16 +4,20 @@ namespace MCD
 {
     class Objet
     {
-        public int id;
         public int x;
         public int y;
         public int sizeX;
         public int sizeY;
+        public int sizeXMin;
+        public int sizeYMin;
         public bool resize = false;
         public string name;
         public string code;
         public string attributs;
         protected static Pen pen;
+        protected static Pen penResize = new Pen(Color.Black, 3);
+        protected Font drawFont = new Font("Arial", 16);
+        protected SolidBrush drawBrush = new SolidBrush(Color.Black);
 
         // verif -----------------------------------------------------
 
@@ -44,8 +48,7 @@ namespace MCD
 
         public string debugEntite()
         {
-            string var = ("id = " + id + "\n"
-                        + "y = " + y + "\n"
+            string var = ("y = " + y + "\n"
                         + "x = " + x + "\n"
                         + "sizeX = " + sizeX + "\n"
                         + "sizeY = " + sizeY + "\n"
