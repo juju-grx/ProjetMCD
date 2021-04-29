@@ -11,6 +11,8 @@ namespace MCD
 
         public static PictureBox pictureBox = null;
         public static RichTextBox richTextBox = null;
+        public static RichTextBox richTextSql = null;
+        public static Button buttonScript = null;
 
         int x;
         int y;
@@ -32,12 +34,14 @@ namespace MCD
             InitializeComponent(); 
             pictureBox = pictureBox1;
             richTextBox = TextBoxAttribut;
+            richTextSql = richTextBox1;
+            buttonScript = genereSql;
             g = pictureBox.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             mcd = new MCD(g);
         }
         //Bouton ---------------------------------------------------------------
-
+        
         private void bt_Selection_Click(object sender, EventArgs e)
         {
             mode = "Selection";
@@ -100,15 +104,15 @@ namespace MCD
             }
             else if (mode == "Lien")
             {
-                if(LienCurrent == null)
+                objetCurrent = null;
+                if (LienCurrent == null)
                 {
                     PasserEnPhase_Lien_Nouvelle();
-                } 
+                }
                 else
                 {
                     PasserEnPhase_Lien_PositionDefinitive();
                 }
-               
             }
 
             Iterer();
@@ -121,11 +125,17 @@ namespace MCD
         {
             if (mode == "Entite")
             {
-                PasserEnPhase_Entite_Position();
+                if (PhaseCourante == "Entite_Nouvelle")
+                {
+                    PasserEnPhase_Entite_Position();
+                }
             }
             else if (mode == "Association")
             {
-                PasserEnPhase_Association_Position();
+                if (PhaseCourante == "Association_Nouvelle")
+                {
+                    PasserEnPhase_Association_Position();
+                }
             }
             else if (mode == "Selection")
             {
@@ -136,17 +146,20 @@ namespace MCD
                 if (objetCurrent != null)
                 {
                     debug.Visible = true;
-                    debug.Text = objetCurrent.debugEntite(); 
+                    debug.Text = objetCurrent.debugEntite();
                 }
-                else 
-                { 
+                else
+                {
                     debug.Visible = false;
                 }
                 PasserEnPhase_Selection_Position();
             }
             else if (mode == "Lien")
             {
-                PasserEnPhase_Lien_Position();
+                if(PhaseCourante == "Lien_Nouvelle")
+                {
+                    PasserEnPhase_Lien_Position();
+                }
             }
 
             Iterer();
@@ -260,14 +273,12 @@ namespace MCD
 
             if (objetCurrent is Entite || objetCurrent is Association)
             {
-                int dX = objetCurrent.x + objetCurrent.sizeX / 2;
-                int dY = objetCurrent.y + (objetCurrent.sizeY + 25) / 2;
-
-                mcd.newLien(dX, dY, dX, dY, "Lien-" + mcd.countLien, objetCurrent, null);
+                mcd.newLien("Lien-" + mcd.countLien, objetCurrent, null);
                 objetCurrent = mcd.GetObjetCurrent();
                 LienCurrent = objetCurrent as Lien;
                 mcd.redrawPage();
                 objetCurrent.draw(g);
+                mcd.countLien++;
             }
         }
 
@@ -296,26 +307,35 @@ namespace MCD
         {
             mcd.checkObjet(x, y);
             objetCurrent = mcd.GetObjetCurrent();
-
-            if (objetCurrent is Entite || objetCurrent is Association)
+            if (objetCurrent != null)
             {
-                if(objetCurrent != LienCurrent.depart)
+                if (objetCurrent is Entite || objetCurrent is Association)
                 {
-                    LienCurrent.sizeX = objetCurrent.x + objetCurrent.sizeX / 2;
-                    LienCurrent.sizeY = objetCurrent.y + (objetCurrent.sizeY + 25) / 2;
-
-                    LienCurrent.arriver = objetCurrent;
-                    mcd.redrawPage();
-                    LienCurrent = null;
-                }
-                else
-                {
-                    mcd.SetObjetCurrent(LienCurrent);
-                    LienCurrent = null;
-                    mcd.delObjet();
+                    if (objetCurrent != LienCurrent.depart)
+                    {
+                        LienCurrent.sizeX = objetCurrent.x + objetCurrent.sizeX / 2;
+                        LienCurrent.sizeY = objetCurrent.y + (objetCurrent.sizeY + 25) / 2;
+                        LienCurrent.arriver = objetCurrent;
+                        mcd.redrawPage();
+                        mcd.ifLinkDupli(LienCurrent);
+                        LienCurrent = null;
+                        objetCurrent = null;
+                    }
+                    else
+                    {
+                        mcd.SetObjetCurrent(LienCurrent);
+                        LienCurrent = null;
+                        mcd.delObjet();
+                    }
                 }
             }
-            
+            else
+            {
+                mcd.SetObjetCurrent(LienCurrent);
+                LienCurrent = null;
+                mcd.delObjet();
+            }
+
             PasserEnPhase_Lien_Attente();
         }
 
@@ -587,7 +607,7 @@ namespace MCD
                     {
                         panelDonnee.Visible = true;
                         NameObjet.Text = objetCurrent.name;
-                        TextBoxAttribut.Text = objetCurrent.attributs;
+                        TextBoxAttribut.Text = objetCurrent.idAttribut + "\n" + objetCurrent.attributs;
                         mode = "EcritDonnee";
                         changeEnabled(false);
                     }                
@@ -602,14 +622,29 @@ namespace MCD
             changeEnabled(true);
             if (mcd.objetCurrent is Entite)
             {
+                objetCurrent.attributs = "";
+                objetCurrent.idAttribut = "";
                 objetCurrent.name = NameObjet.Text;
                 String[] objet = TextBoxAttribut.Text.Split('\n');
-                objetCurrent.attributs = objet[0];
-                for (int i = 1; i < objet.Length; i ++)
+                for (int i = 0; i < objet.Length; i ++)
                 {
                     if(objet[i] != "")
                     {
-                        objetCurrent.attributs = objetCurrent.attributs + '\n' + objet[i];
+                        if (objet[i].Contains("#"))
+                        {
+                            if(objetCurrent.idAttribut != "")
+                            {
+                                objetCurrent.attributs += objet[i].Replace("#", "") + '\n';
+                            }
+                            else
+                            {
+                                objetCurrent.idAttribut = objet[i];
+                            }
+                        }
+                        else
+                        {
+                            objetCurrent.attributs += objet[i] + '\n';
+                        }
                     }
                 }
                 if(objetCurrent.attributs == "")
@@ -623,6 +658,7 @@ namespace MCD
                 objetCurrent.name = NameObjet.Text;
                 objetCurrent.attributs = TextBoxAttribut.Text;
             }
+            mcd.updateScriptSql();
         }
         
         private void form1_KeyDown(object sender, KeyEventArgs e)
@@ -637,7 +673,7 @@ namespace MCD
                     mcd.redrawPage();
                 }
             }
-            if ( Delete && (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete))
+            if ( Delete && ( e.KeyCode == Keys.Delete))
             {
                 mcd.delObjet();
             }
@@ -663,8 +699,13 @@ namespace MCD
         {
             if (objetCurrent.x < 0) { objetCurrent.x = 3; }
             if (objetCurrent.y < 45) { objetCurrent.y = 45; }
-            if (objetCurrent.x + objetCurrent.sizeX > pictureBox1.Width) { objetCurrent.x = pictureBox1.Width - objetCurrent.sizeX - 3; }
+            if (objetCurrent.x + objetCurrent.sizeX > pictureBox1.Width - richTextBox1.Width) { objetCurrent.x = pictureBox1.Width - richTextBox1.Width - objetCurrent.sizeX - 3; }
             if (objetCurrent.y + objetCurrent.sizeY + 25 > pictureBox1.Height) { objetCurrent.y = pictureBox1.Height - objetCurrent.sizeY - 3; }
+        }
+
+        private void genereSql_Click(object sender, EventArgs e)
+        {
+            mcd.updateScriptSql();
         }
     }
 }

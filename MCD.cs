@@ -40,82 +40,109 @@ namespace MCD
             objetCurrent = tabAssociation[countAssociation] = new Association(X, Y, SizeX, SizeY, Code, Name);
         }
 
-        public void newLien(int X, int Y, int SizeX, int SizeY, string Code, Objet Depart, Objet Arriver)
+        public void newLien(string Code, Objet Depart, Objet Arriver)
         {
-            objetCurrent = tabLien[countLien] = new Lien(X, Y, SizeX, SizeY, Code, Depart, Arriver);
-            countLien += 1;
+            objetCurrent = tabLien[countLien] = new Lien(Code, Depart, Arriver);
         }
 
         public void delObjet()
         {
             if (objetCurrent is Entite)
             {
-                for (int i = 0; i < countEntite; i++)
+                if (countLien != 0)
                 {
-                    if (tabEntite[i] == objetCurrent)
+                    for (int i = 0; i < tabLien.Length; i++)
                     {
-                        tabEntite[i] = tabEntite[i + 1];
-                        for (int j = i; j < countEntite; j++)
+                        if (objetCurrent == tabLien[i].depart || objetCurrent == tabLien[i].arriver)
                         {
-                            if(tabEntite[j] == tabEntite[j + 1])
-                            {
-                                tabEntite[j + 1] = tabEntite[j + 2];
-                            }
-                            else
-                            {
-                                tabEntite[j + 1] = null;
-                            }
+                            delLien(tabLien[i]);
                         }
                     }
                 }
+                delEntite(objetCurrent);
             }
             else if (objetCurrent is Association)
             {
-                for (int i = 0; i < countAssociation; i++)
-                {
-                    if (tabAssociation[i] == objetCurrent)
-                    {
-                        tabAssociation[i] = tabAssociation[i + 1];
-                        for (int j = i; j < countAssociation; j++)
-                        {
-                            if (tabAssociation[j] == tabAssociation[j + 1])
-                            {
-                                tabAssociation[j + 1] = tabAssociation[j + 2];
-                            }
-                            else
-                            {
-                                tabAssociation[j + 1] = null;
-                            }
-                        }
-                    }
-                }
+                delAssociation(objetCurrent);
             }
             else if (objetCurrent is Lien)
             {
-                for (int i = 0; i < countLien; i++)
+                delLien(objetCurrent);
+            }
+            objetCurrent = null;
+            redrawPage();
+            updateScriptSql();
+        }
+
+        public void delEntite(Objet objet)
+        {
+            for (int i = 0; i < countEntite; i++)
+            {
+                if (tabEntite[i] == objet)
                 {
-                    if (tabLien[i] == objetCurrent)
+                    tabEntite[i] = tabEntite[i + 1];
+                    for (int j = i; j < countEntite; j++)
                     {
-                        tabLien[i] = tabLien[i + 1];
-                        for (int j = i; j < countLien; j++)
+                        if (tabEntite[j] == tabEntite[j + 1])
                         {
-                            if (tabLien[j] == tabLien[j + 1])
-                            {
-                                tabLien[j + 1] = tabLien[j + 2];
-                            }
-                            else
-                            {
-                                tabLien[j + 1] = null;
-                            }
+                            tabEntite[j + 1] = tabEntite[j + 2];
+                        }
+                        else
+                        {
+                            tabEntite[j + 1] = null;
                         }
                     }
                 }
             }
-            objetCurrent = null;
-            redrawPage();
+            countEntite--;
         }
-        
-            //affichage -------------------------------------------------------------------------------
+
+        public void delAssociation(Objet objet)
+        {
+            for (int i = 0; i < countAssociation; i++)
+            {
+                if (tabAssociation[i] == objet)
+                {
+                    tabAssociation[i] = tabAssociation[i + 1];
+                    for (int j = i; j < countAssociation; j++)
+                    {
+                        if (tabAssociation[j] == tabAssociation[j + 1])
+                        {
+                            tabAssociation[j + 1] = tabAssociation[j + 2];
+                        }
+                        else
+                        {
+                            tabAssociation[j + 1] = null;
+                        }
+                    }
+                }
+            }
+            countAssociation--;
+        }
+        public void delLien(Objet objet)
+        {
+            for (int i = 0; i < countLien; i++)
+            {
+                if (tabLien[i] == objet)
+                {
+                    tabLien[i] = tabLien[i + 1];
+                    for (int j = i; j < countLien; j++)
+                    {
+                        if (tabLien[j] == tabLien[j + 1])
+                        {
+                            tabLien[j + 1] = tabLien[j + 2];
+                        }
+                        else
+                        {
+                            tabLien[j + 1] = null;
+                        }
+                    }
+                }
+            }
+            countLien--;
+        }
+
+        //affichage -------------------------------------------------------------------------------
 
         public void drawCurrentObjet(int X, int Y)
         {
@@ -148,7 +175,7 @@ namespace MCD
             }
             for (int i = 0; i < countEntite; i++)
             {
-                if(tabEntite[i] != null)
+                if (tabEntite[i] != null)
                 {
                     tabEntite[i].draw(g);
                 }
@@ -167,7 +194,7 @@ namespace MCD
         {
             for (int i = 0; i < countEntite; i++)
             {
-                if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true )
+                if (tabEntite[i] != null && tabEntite[i].withinObjet(X, Y) == true)
                 {
                     if ((objetCurrent == null) || (objetCurrent != objetPrevious))
                     {
@@ -276,6 +303,11 @@ namespace MCD
                 tabAssociation[i] = null;
             }
             countAssociation = 0;
+            for (int i = 0; i < countLien; i++)
+            {
+                tabLien[i] = null;
+            }
+            countLien = 0;
 
             StreamReader sr = new StreamReader(@filename);
             do
@@ -288,6 +320,21 @@ namespace MCD
                     if (line.Contains("%"))
                     {
                         objetCurrent.attributs = line.Replace(";", "\n").Replace("\t", "").Replace("%", "");
+
+                        String[] objet = objetCurrent.attributs.Split('\n');
+                        objetCurrent.attributs = "";
+
+                        for (int i = 0; i < objet.Length; i++)
+                        {
+                            if (objet[i].Contains("#"))
+                            {
+                                objetCurrent.idAttribut = objet[i];
+                            }
+                            else
+                            {
+                                objetCurrent.attributs += objet[i] + "\n";
+                            }
+                        }
                     }
                     else
                     {
@@ -308,20 +355,20 @@ namespace MCD
                             Objet depart = null;
                             Objet arriver = null;
 
-                            for(int i = 0; i < tabEntite.Length; i ++)
+                            for (int i = 0; i < tabEntite.Length; i++)
                             {
-                                if(objet[6] == tabEntite[i].code)
+                                if (objet[1] == tabEntite[i].code)
                                 {
                                     depart = tabEntite[i];
                                 }
-                                if(objet[7] == tabEntite[i].code)
+                                if (objet[2] == tabEntite[i].code)
                                 {
                                     arriver = tabEntite[i];
                                 }
                             }
 
-                             newLien(Int32.Parse(objet[2]), Int32.Parse(objet[3]), Int32.Parse(objet[4]), Int32.Parse(objet[5]), objet[0], depart, arriver);
-                             countLien += 1;
+                            newLien(objet[0], depart, arriver);
+                            countLien += 1;
                         }
                     }
                 }
@@ -332,9 +379,9 @@ namespace MCD
 
         public void ifLienLink(Objet objetLink)
         {
-            for (int i = 0; i < tabLien.Length; i ++)
+            for (int i = 0; i < tabLien.Length; i++)
             {
-                if(tabLien[i] != null)
+                if (tabLien[i] != null)
                 {
                     if (objetLink == tabLien[i].depart)
                     {
@@ -347,7 +394,7 @@ namespace MCD
                         tabLien[i].sizeY = objetLink.y + objetLink.sizeY / 2 + 25;
                     }
                 }
-                
+
             }
         }
 
@@ -357,10 +404,64 @@ namespace MCD
             {
                 if (tabLien[i] != null)
                 {
-                    
+
                 }
 
             }
+        }
+
+        public void ifLinkDupli(Lien lien)
+        {
+            for (int i = 0; i < tabLien.Length; i++)
+            {
+                /*if((lien.depart == tabLien[i].depart) && (lien.arriver == tabLien[i].arriver))
+                {
+                    delLien(lien);
+                }*/
+            }
+        }
+
+        public string generationScriptSQL()
+        {
+            string scriptSql = "";
+            for (int i = 0; i < countEntite; i++)
+            {
+                if (tabEntite[i].attributs != null)
+                {
+                    scriptSql += "CREATE TABLE " + tabEntite[i].name + " (";
+                    String[] objet = tabEntite[i].attributs.Split('\n');
+                    string attributs = "";
+                    string idAttributs = "";
+                    bool ID = false;
+                    if(tabEntite[i].idAttribut != null)
+                    {
+                        idAttributs = tabEntite[i].idAttribut.Replace("#", "");
+                        scriptSql += "\n    " + idAttributs + ",";
+                        ID = true;
+                    }
+                    for (int j = 0; j < objet.Length; j++)
+                    {
+                        attributs += "\n    " + objet[j] + ",";
+                    }
+                    scriptSql += attributs;
+                    if(ID)
+                    {
+                        scriptSql += "\n    PRIMARY KEY(" + idAttributs + "),";
+                    }
+                    scriptSql += "\n );\n\n";
+                }
+            }
+            return scriptSql;
+        }
+
+        public void updateScriptSql()
+        {
+            string sql = generationScriptSQL();
+            richTextSql.Text = sql;
+            if (sql != "")
+            { buttonScript.Text = "Recharger SQL"; }
+            else
+            { buttonScript.Text = "Generer SQL"; }
         }
 
         // Getters ---------------------------------------------------------------------

@@ -94,3 +94,6 @@ C:\Users\julie\source\repos\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resou
 F:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
 F:\JG\Mr_Ricaud_Slam\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
 F:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+E:\JG\Mr_Ricaud_Slam\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+E:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
+E:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll

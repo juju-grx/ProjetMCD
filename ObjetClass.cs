@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace MCD
 {
@@ -14,6 +15,7 @@ namespace MCD
         public string name;
         public string code;
         public string attributs;
+        public string idAttribut;
         protected static Pen pen;
         protected static Pen penResize = new Pen(Color.Black, 3);
         protected Font drawFont = new Font("Arial", 16);
@@ -40,7 +42,7 @@ namespace MCD
 
         public string attributsCorrect()
         {
-            string _attributs = attributs.Replace("\n", ";");
+            string _attributs = idAttribut + ";" + attributs.Replace("\n", ";");
             return _attributs;
         }
 

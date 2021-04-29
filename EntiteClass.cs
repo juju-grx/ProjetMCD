@@ -13,6 +13,8 @@ namespace MCD
             sizeY = SizeY;
             sizeXMin = 115;
             sizeYMin = 100;
+            idAttribut = null;
+            attributs = null;
             pen = new Pen(Color.Black, 1);
             code = Code;
             name = Name;
@@ -54,14 +56,25 @@ namespace MCD
             g.DrawLines(pen, pointsTitre);
             g.DrawLines(pen, pointsAttributs);
 
-            SizeF attributsSizeX = g.MeasureString(name, new Font("Arial", 14));
-            int attributssizeX = (int)attributsSizeX.Width;
+            SizeF attributsSize = g.MeasureString(name, new Font("Arial", 14));
+            int attributssizeX = (int)attributsSize.Width;
+            int attributssizeY = 0;
+            if (idAttribut != null)
+            {
+                attributssizeY = (int)attributsSize.Height;
+            }
+            
 
             g.DrawString(name, drawFont, drawBrush, x + (sizeX / 2 - attributssizeX / 2), y);
 
             if (attributs != null)
             {
-                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27);
+                if (idAttribut != null)
+                {
+                    idAttribut.Replace("#", "");
+                    g.DrawString(idAttribut, new Font("Arial", 14f, FontStyle.Underline), drawBrush, x + 2, y + 27);
+                }
+                g.DrawString(attributs, new Font("Arial", 14), drawBrush, x + 2, y + 27 + attributssizeY);
             }
 
             if (resize == true)
@@ -92,19 +105,37 @@ namespace MCD
                 sizeXMin = sizeX = 115;
             }
 
+            SizeF idAttributSize = g.MeasureString(idAttribut, drawFont);
+            int idAttributsize = (int)nameSize.Width;
+
+            if (idAttributsize > 115)
+            {
+                sizeXMin = sizeX = idAttributsize + 10;
+            }
+            else
+            {
+                sizeXMin = sizeX = 115;
+            }
+
             if (attributs != null)
             {
                 String[] objet = attributs.Split('\n');
 
                 SizeF attributsSizeY = g.MeasureString(objet[0], new Font("Arial", 14));
                 int attributssizeY = (int)attributsSizeY.Height;
+                int idAttributssizeY = 0;
+
+                if (idAttribut != null)
+                {
+                    idAttributssizeY += 20;
+                }
 
                 if(attributssizeY * objet.Length > 100)
                 {
-                    sizeYMin = sizeY = attributssizeY * objet.Length;
+                    sizeYMin = sizeY = attributssizeY * objet.Length + idAttributssizeY;
                 } else
                 {
-                    sizeYMin = sizeY = 100;
+                    sizeYMin = sizeY = 100 + idAttributssizeY;
                 }
 
                 for (int i = 0; i <objet.Length; i++)

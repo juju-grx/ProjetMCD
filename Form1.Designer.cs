@@ -38,11 +38,13 @@
             this.dataRecord = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.genereSql = new System.Windows.Forms.Button();
             this.panelDonnee = new System.Windows.Forms.Panel();
             this.NameObjet = new System.Windows.Forms.TextBox();
             this.bt_off = new System.Windows.Forms.Button();
             this.TextBoxAttribut = new System.Windows.Forms.RichTextBox();
             this.debug = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelDonnee.SuspendLayout();
@@ -113,6 +115,7 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.LightGray;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.genereSql);
             this.panel1.Controls.Add(this.bt_enregistrer);
             this.panel1.Controls.Add(this.bt_ouvrir);
             this.panel1.Controls.Add(this.bt_Selection);
@@ -121,6 +124,13 @@
             this.panel1.Controls.Add(this.bt_Lien);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel1.Name = "panel1";
+            // 
+            // genereSql
+            // 
+            resources.ApplyResources(this.genereSql, "genereSql");
+            this.genereSql.Name = "genereSql";
+            this.genereSql.UseVisualStyleBackColor = true;
+            this.genereSql.Click += new System.EventHandler(this.genereSql_Click);
             // 
             // panelDonnee
             // 
@@ -157,11 +167,17 @@
             this.debug.Name = "debug";
             this.debug.ReadOnly = true;
             // 
+            // richTextBox1
+            // 
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
+            this.richTextBox1.Name = "richTextBox1";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.debug);
             this.Controls.Add(this.panelDonnee);
             this.Controls.Add(this.panel1);
@@ -195,5 +211,7 @@
         private System.Windows.Forms.Button bt_off;
         private System.Windows.Forms.TextBox NameObjet;
         private System.Windows.Forms.RichTextBox debug;
+        private System.Windows.Forms.Button genereSql;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

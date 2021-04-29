@@ -93,14 +93,20 @@
     <value>389, 3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Normal</value>
+  </data>
+  <data name="genereSql.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>1739, 6</value>
+  </data>
+  <data name="genereSql.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>96, 23</value>
+  </data>
+  <data name="genereSql.Text" xml:space="preserve">
+    <value>Generer SQL</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1904, 38</value>
@@ -113,6 +119,15 @@
   </data>
   <data name="debug.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>108, 116</value>
+  </data>
+  <data name="richTextBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>1650, 38</value>
+  </data>
+  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>254, 1003</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, System.Private.CoreLib">
     <value>False</value>

@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\girojul\\.nuget\\packages\\": {}
+    "C:\\Users\\julie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+      "projectUniqueName": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
       "projectName": "ProjetMCD",
-      "projectPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
-      "packagesPath": "C:\\Users\\girojul\\.nuget\\packages\\",
-      "outputPath": "F:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
+      "projectPath": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+      "packagesPath": "C:\\Users\\julie\\.nuget\\packages\\",
+      "outputPath": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\girojul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\julie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
