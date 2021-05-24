@@ -318,15 +318,24 @@ namespace MCD
                         LienCurrent.arriver = objetCurrent;
                         mcd.redrawPage();
                         mcd.ifLinkDupli(LienCurrent);
-                        LienCurrent = null;
-                        objetCurrent = null;
                     }
                     else
                     {
                         mcd.SetObjetCurrent(LienCurrent);
-                        LienCurrent = null;
+                        //LienCurrent = null;
                         mcd.delObjet();
                     }
+                    if (LienCurrent.depart is Entite && LienCurrent.arriver is Entite)
+                    {
+                        if (objetCurrent != LienCurrent.depart)
+                        {
+                            mcd.SetObjetCurrent(LienCurrent);
+                            LienCurrent = null;
+                            mcd.delObjet();
+                        }
+                    }  
+                    LienCurrent = null;
+                    objetCurrent = null;
                 }
             }
             else

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {}
+    "C:\\Users\\Thomas Piard\\Desktop\\Cours\\projet\\ProjetMCD\\ProjetMCD.csproj": {}
   },
   "projects": {
-    "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj": {
+    "C:\\Users\\Thomas Piard\\Desktop\\Cours\\projet\\ProjetMCD\\ProjetMCD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Piard\\Desktop\\Cours\\projet\\ProjetMCD\\ProjetMCD.csproj",
         "projectName": "ProjetMCD",
-        "projectPath": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\ProjetMCD.csproj",
-        "packagesPath": "C:\\Users\\julie\\.nuget\\packages\\",
-        "outputPath": "E:\\JG\\Mr_Ricaud_Slam\\ProjetMCD\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Piard\\Desktop\\Cours\\projet\\ProjetMCD\\ProjetMCD.csproj",
+        "packagesPath": "C:\\Users\\Thomas Piard\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Piard\\Desktop\\Cours\\projet\\ProjetMCD\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\julie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Piard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

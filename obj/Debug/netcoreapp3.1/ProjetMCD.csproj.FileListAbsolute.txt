@@ -97,3 +97,21 @@ F:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dl
 E:\JG\Mr_Ricaud_Slam\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
 E:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
 E:\JG\Mr_Ricaud_Slam\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.exe
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.deps.json
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.runtimeconfig.json
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.runtimeconfig.dev.json
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.dll
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\ProjetMCD.pdb
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\bin\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csprojAssemblyReference.cache
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.resources
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\MCD.Form1.fr.resources
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.GenerateResource.cache
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.AssemblyInfoInputs.cache
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.AssemblyInfo.cs
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.csproj.CoreCompileInputs.cache
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\fr\ProjetMCD.resources.dll
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.dll
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.pdb
+C:\Users\Thomas Piard\Desktop\Cours\projet\ProjetMCD\obj\Debug\netcoreapp3.1\ProjetMCD.genruntimeconfig.cache
